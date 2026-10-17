@@ -1,0 +1,41 @@
+name: Refresh dashboard data
+
+on:
+  schedule:
+    # Weekdays 12:00 UTC = 7:00 AM CDT (6:00 AM CST after Nov 1). GitHub cron is UTC-only and can run a few minutes late.
+    - cron: "0 12 * * 1-5"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Refresh data/data.json (stdlib only; failures keep last good values)
+        run: python3 scripts/refresh.py
+      - name: Show refresh log
+        run: python3 -c "import json;[print(l['status'].upper(),l['source'],'-',l['detail']) for l in json.load(open('data/data.json'))['refreshLog']]"
+      - name: Commit if changed
+        run: |
+          git config user.name "semi-dashboard-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then echo "No data changes."; exit 0; fi
+          git commit -m "data: refresh $(date -u +%Y-%m-%dT%H%MZ)"
+          git push
+      - name: Request Pages rebuild (legacy branch build)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" >/dev/null || echo "Pages rebuild request skipped (push already triggers a build)."

@@ -1,0 +1,130 @@
+{
+ "snapshotOf": "Matt's Vercel dashboard embedded DATA (asOf Jul 10, 2026 4:00 PM ET)",
+ "source": "https://semi-dashboard-alpha.vercel.app (retired)",
+ "warning": "Historical baseline. Several figures do not match primary sources; see CHANGELOG.md.",
+ "companies": {
+  "NVDA": 210.96,
+  "AMD": 557.89,
+  "INTC": 109.84,
+  "TSM": 434.11,
+  "ASML": 1797.32,
+  "MU": 979.3,
+  "SOXX": 581.34
+ },
+ "foundry": {
+  "labels": [
+   "Q4'24",
+   "Q1'25",
+   "Q2'25",
+   "Q3'25",
+   "Q4'25",
+   "Q1'26",
+   "Q2'26",
+   "Q3'26",
+   "Q4'26E",
+   "Q1'27E"
+  ],
+  "cowos": [
+   40,
+   50,
+   62,
+   72,
+   85,
+   95,
+   105,
+   115,
+   125,
+   135
+  ],
+  "pressure": [
+   82,
+   86,
+   89,
+   92,
+   94,
+   96,
+   97,
+   96,
+   94,
+   92
+  ],
+  "utilization": [
+   93,
+   95,
+   96,
+   97,
+   98,
+   98,
+   99,
+   98,
+   97,
+   96
+  ]
+ },
+ "sector": {
+  "labels": [
+   "Jan'26",
+   "Feb'26",
+   "Mar'26",
+   "Apr'26",
+   "May'26",
+   "Jun'26"
+  ],
+  "salesB": [
+   82.5,
+   84.0,
+   86.1,
+   87.8,
+   89.4,
+   91.2
+  ],
+  "ppi": [
+   66.5,
+   67.9,
+   68.7,
+   69.4,
+   70.1,
+   70.8
+  ]
+ },
+ "heat": {
+  "ai_demand": [
+   "high",
+   "Elevated"
+  ],
+  "hbm": [
+   "high",
+   "Tight"
+  ],
+  "cowos": [
+   "high",
+   "Hot"
+  ],
+  "trade": [
+   "high",
+   "Rising"
+  ],
+  "power": [
+   "mid",
+   "Warming"
+  ],
+  "semi_ppi": [
+   "mid",
+   "Firming"
+  ],
+  "sales_yoy": [
+   "low",
+   "Strong"
+  ],
+  "confidence": [
+   "low",
+   "Stable"
+  ]
+ },
+ "kpis": {
+  "fy2026": "$975B (Deloitte)",
+  "jun_sales": "$91.2B +2.0% MoM +22% YoY (SIA est.)",
+  "foundry_ttm": "$218.8B (IDC)",
+  "kpmg": 63
+ }
+}

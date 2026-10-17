@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Semiconductor Industry Dashboard</title>
+<meta name="description" content="Matt's semi dashboard: AI-era semiconductor constraints, sector tape, leading indicators and company monitor. Every figure sourced and dated." />
+<meta property="og:title" content="Semiconductor Industry Dashboard" />
+<meta property="og:description" content="Sourced, dated semi-industry monitor: SIA, FRED PPI, TSMC monthly revenue, memory prices, exports, hyperscaler capex, neocloud credit." />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<script src="vendor/chart.umd.min.js" defer></script>
+<style>
+  :root{
+    --bg:#0b0f1a; --panel:#121827; --panel-2:#0f1422; --line:#1f2a44;
+    --ink:#e6ecf5; --ink-dim:#a9b5cc; --ink-mute:#8794b0;
+    --accent:#5eead4; --accent-2:#60a5fa; --warn:#f59e0b; --hot:#f87171;
+    --good:#4ade80; --bad:#f87171; --up:#60a5fa; --dn:#fb923c;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif}
+  a{color:var(--accent-2);text-decoration:none}
+  a:hover,a:focus-visible{text-decoration:underline}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .app{display:grid;grid-template-columns:280px 1fr;grid-template-areas:"side main";min-height:100vh}
+  .main{grid-area:main}
+  .sidebar{grid-area:side}
+  /* Sidebar */
+  .sidebar{background:var(--panel-2);border-right:1px solid var(--line);padding:20px 16px;position:sticky;top:0;height:100vh;overflow-y:auto}
+  .brand{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+  .brand-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+  .brand h1{font-size:15px;margin:0;letter-spacing:.2px}
+  .sb-section{margin-top:18px}
+  .sb-title{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--ink-mute);margin-bottom:8px}
+  .sb-link{display:block;padding:10px 10px;border-radius:8px;color:var(--ink);background:transparent;border:1px solid transparent;margin-bottom:6px;font-size:13px;min-height:44px}
+  .sb-link:hover{background:#0d1322;border-color:var(--line);text-decoration:none}
+  .sb-link .why{display:block;color:var(--ink-mute);font-size:11.5px;margin-top:2px}
+  .sb-link .stale-tag{color:var(--warn);font-size:11px}
+  /* Main */
+  .main{padding:22px 26px 60px;min-width:0}
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+  .topbar h2{margin:0;font-size:20px}
+  .topbar .sub{color:var(--ink-dim);font-size:12.5px;margin-top:2px}
+  .controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .btn{background:linear-gradient(180deg,#1b2540,#121a30);border:1px solid var(--line);color:var(--ink);padding:10px 14px;border-radius:8px;cursor:pointer;font-size:13px;display:inline-flex;align-items:center;gap:8px;min-height:44px}
+  .btn:hover{border-color:#334;box-shadow:0 0 0 1px #334 inset}
+  .btn[disabled]{opacity:.6;cursor:wait}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#64748b;margin-right:4px;vertical-align:middle}
+  .dot.fresh{background:var(--accent);animation:pulse 1.8s infinite}
+  .dot.stale{background:var(--warn)}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(94,234,212,.6)}70%{box-shadow:0 0 0 10px rgba(94,234,212,0)}100%{box-shadow:0 0 0 0 rgba(94,234,212,0)}}
+  @media (prefers-reduced-motion: reduce){.dot.fresh{animation:none}}
+  .status{font-size:12px;color:var(--ink-dim)}
+  /* chips */
+  .chip{display:inline-flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:11px;color:var(--ink-mute);margin-top:6px;line-height:1.3}
+  .chip a{color:var(--ink-dim);text-decoration:underline;text-decoration-color:#3b4a6b}
+  .tag{border:1px solid var(--line);border-radius:4px;padding:0 4px;color:var(--ink-dim)}
+  .tag.Confirmed{border-color:rgba(74,222,128,.45)} .tag.Reported{border-color:rgba(96,165,250,.45)}
+  .tag.Forecast,.tag.Rule,.tag.Desk{border-color:rgba(245,158,11,.45)} .tag.na{border-color:rgba(248,113,113,.5)}
+  .stale-badge{background:rgba(245,158,11,.18);color:#fbbf24;border:1px solid rgba(245,158,11,.5);border-radius:4px;padding:0 4px;font-weight:700;letter-spacing:.4px}
+  .na{color:var(--hot)}
+  /* KPIs */
+  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:18px}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;min-width:0}
+  .kpi .k-title{font-size:11.5px;text-transform:uppercase;color:var(--ink-mute);letter-spacing:1px}
+  .kpi .k-val{font-size:22px;margin-top:6px;font-weight:600}
+  .kpi .k-sub{font-size:12px;color:var(--ink-dim);margin-top:4px}
+  .kpi.pcds{border-color:#2b3a5e}
+  .up{color:var(--up)} .dn{color:var(--dn)}
+  /* Grid */
+  .grid{display:grid;grid-template-columns:1.3fr 1fr;gap:14px;margin-bottom:16px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;min-width:0}
+  .p-title{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .p-title h3{margin:0;font-size:14px;letter-spacing:.2px}
+  .p-title .meta{font-size:11.5px;color:var(--ink-mute)}
+  .chart-wrap{position:relative;height:260px}
+  .chart-wrap.tall{height:280px}
+  .fallback table{width:100%;border-collapse:collapse;font-size:12px}
+  .fallback td,.fallback th{border-bottom:1px solid var(--line);padding:4px 6px;text-align:right}
+  .fallback th:first-child,.fallback td:first-child{text-align:left}
+  .facts{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}
+  .fact{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+  .fact .f-l{font-size:11.5px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.6px}
+  .fact .f-v{font-weight:600;margin-top:2px}
+  .fact .f-s{font-size:11.5px;color:var(--ink-dim);margin-top:2px}
+  /* Heat map */
+  .heat{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+  .heat-cell{border-radius:10px;padding:10px 12px;border:1px solid var(--line)}
+  .hc-name{font-size:12px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.8px;display:flex;justify-content:space-between;gap:6px}
+  .hc-val{font-weight:600;margin-top:4px;font-size:14px}
+  .hc-note{font-size:11.5px;color:var(--ink-dim);margin-top:2px}
+  .hc-chg{font-size:11px;color:var(--ink-mute);margin-top:4px}
+  .hc-chg b{color:var(--ink)}
+  .hc-low{background:rgba(34,197,94,.10);border-color:rgba(34,197,94,.35)}
+  .hc-mid{background:rgba(245,158,11,.10);border-color:rgba(245,158,11,.35)}
+  .hc-high{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.4)}
+  .lvl{font-size:10.5px;border-radius:4px;padding:0 5px;border:1px solid currentColor}
+  /* Leading */
+  .lead-groups{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .lead-group h4{margin:0 0 6px;font-size:11.5px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-mute)}
+  .lead{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:9px 10px;margin-bottom:8px}
+  .lead .l-l{font-size:12px;color:var(--ink-dim)}
+  .lead .l-v{font-weight:600;font-size:15px;margin-top:2px}
+  .lead .l-s{font-size:11.5px;color:var(--ink-dim);margin-top:2px}
+  table.capex{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
+  table.capex th,table.capex td{padding:6px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  table.capex td.n{text-align:right;font-variant-numeric:tabular-nums}
+  /* Company tiles */
+  .companies{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .co{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;min-width:0}
+  .co-top{display:flex;justify-content:space-between;align-items:center;gap:6px}
+  .co-sym{font-weight:700;font-size:15px;letter-spacing:.3px}
+  .co-name{font-size:11.5px;color:var(--ink-mute);text-align:right}
+  .co-price{font-size:20px;font-weight:700;margin-top:6px}
+  .co-change{font-size:12.5px;margin-top:2px}
+  .co-meta{font-size:11.5px;color:var(--ink-dim);margin-top:8px;display:flex;justify-content:space-between;gap:6px;flex-wrap:wrap}
+  .co-tag{display:inline-block;width:6px;height:24px;border-radius:3px;vertical-align:middle;margin-right:8px}
+  .alerts{display:flex;flex-direction:column;gap:8px}
+  .alert{display:flex;gap:10px;align-items:flex-start;padding:10px;border-left:3px solid var(--accent);background:#0e1526;border-radius:8px}
+  .alert.warn{border-color:var(--warn)}
+  .alert.hot{border-color:var(--hot)}
+  .alert .a-title{font-weight:600;font-size:13px}
+  .alert .a-body{font-size:12px;color:var(--ink-dim);margin-top:2px}
+  .alert .a-rule{font-size:11px;color:var(--ink-mute);margin-top:2px}
+  .footer{margin-top:18px;color:var(--ink-mute);font-size:11.5px;text-align:center}
+  details.log{margin-top:10px;font-size:11.5px;color:var(--ink-dim)}
+  details.log summary{cursor:pointer}
+  .err{background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.5);padding:12px;border-radius:10px;margin-bottom:14px}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  @media(max-width:1300px){.kpis{grid-template-columns:repeat(3,1fr)}.lead-groups{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:1100px){.app{grid-template-columns:1fr;grid-template-areas:"main" "side"}.sidebar{position:relative;height:auto;border-right:0;border-top:1px solid var(--line)}.kpis,.companies{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}}
+  @media(max-width:600px){.main{padding:16px 12px 40px}.kpis,.companies,.heat,.facts,.lead-groups{grid-template-columns:1fr}.chart-wrap,.chart-wrap.tall{height:220px}.topbar h2{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <main class="main" id="main">
+    <div class="topbar">
+      <div>
+        <h2>Semiconductor Industry Dashboard</h2>
+        <div class="sub">AMD · Intel · NVIDIA · TSMC · ASML · Micron · SOXX · Foundry tape &amp; CoWoS · Leading indicators · Change-detection heat map</div>
+      </div>
+      <div class="controls">
+        <span class="status" role="status" aria-live="polite"><span id="dot" class="dot" aria-hidden="true"></span> <span id="statusText">Loading data.json…</span></span>
+        <button id="refreshBtn" class="btn" type="button">↻ Reload data</button>
+      </div>
+    </div>
+    <noscript><div class="err">This dashboard needs JavaScript to render data/data.json. The raw data is at <a href="data/data.json">data/data.json</a>.</div></noscript>
+    <div id="errBox"></div>
+
+    <div class="kpis" id="kpis"></div>
+
+    <div class="grid">
+      <section class="panel" aria-labelledby="h-foundry">
+        <div class="p-title"><h3 id="h-foundry">TSMC Foundry Tape · CoWoS</h3><span class="meta">Monthly revenue NT$B (bars) · YoY % (line)</span></div>
+        <div class="chart-wrap tall" id="tsmcWrap"><canvas id="tsmcChart" role="img" aria-label="TSMC monthly revenue in NT dollars billions with year-over-year percent"></canvas></div>
+        <div id="tsmcChip"></div>
+        <div class="facts" id="cowos"></div>
+      </section>
+      <section class="panel" aria-labelledby="h-heat">
+        <div class="p-title"><h3 id="h-heat">Change Detection · Heat Map</h3><span class="meta">Green = stable · Yellow = warming · Red = hot · ▲▼ vs prior state</span></div>
+        <div class="heat" id="heatmap"></div>
+      </section>
+    </div>
+
+    <div class="grid">
+      <section class="panel" aria-labelledby="h-sector">
+        <div class="p-title"><h3 id="h-sector">Global Semi Sales &amp; Pricing</h3><span class="meta">SIA monthly sales $B (3-mo avg) vs semi PPI (FRED PCU3344133441)</span></div>
+        <div class="chart-wrap" id="sectorWrap"><canvas id="sectorChart" role="img" aria-label="SIA monthly global semiconductor sales versus FRED semiconductor PPI"></canvas></div>
+        <div id="sectorChips"></div>
+      </section>
+      <section class="panel" aria-labelledby="h-alerts">
+        <div class="p-title"><h3 id="h-alerts">Alerts</h3><span class="meta">Fire only on a state change (≤14 days) or a threshold breach</span></div>
+        <div class="alerts" id="alerts"></div>
+      </section>
+    </div>
+
+    <section class="panel" style="margin-bottom:14px" aria-labelledby="h-lead">
+      <div class="p-title"><h3 id="h-lead">Leading Indicators</h3><span class="meta">Foundry · memory pricing · exports · neocloud credit · hyperscaler capex</span></div>
+      <div class="lead-groups" id="leading"></div>
+      <h4 style="margin:14px 0 2px;font-size:12px;color:var(--ink-dim)">Hyperscaler capex · <span id="capexQ"></span></h4>
+      <div style="overflow-x:auto"><table class="capex" id="capex"></table></div>
+      <div class="chip" id="capexNote"></div>
+    </section>
+
+    <section class="panel" style="margin-bottom:14px" aria-labelledby="h-co">
+      <div class="p-title"><h3 id="h-co">Company Monitor</h3><span class="meta" id="quotesAsOf"></span></div>
+      <div class="companies" id="companies"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="h-moves">
+      <div class="p-title"><h3 id="h-moves">Latest Session % Change</h3><span class="meta" id="movesMeta">Relative daily move across tracked names</span></div>
+      <div class="chart-wrap" id="movesWrap"><canvas id="movesChart" role="img" aria-label="Latest session percent change by ticker"></canvas></div>
+    </section>
+
+    <div class="footer">
+      <div id="genAt"></div>
+      Static site · data refreshed server-side by GitHub Actions into <a href="data/data.json">data/data.json</a> (history in <a href="data/history/index.json">data/history/</a>) · the browser never calls quote APIs · Not investment advice.
+      <details class="log"><summary>Last refresh log</summary><div id="log"></div></details>
+    </div>
+  </main>
+
+  <aside class="sidebar" aria-label="Sources and links">
+    <div class="brand"><span class="brand-dot" aria-hidden="true"></span><h1>Semi Industry Monitor</h1></div>
+    <div class="sb-section">
+      <div class="sb-title">Tracked</div>
+      <div class="sb-link">NVIDIA · AMD · Intel · TSMC<span class="why">Plus ASML, Micron, SOXX · CRWV (neocloud credit proxy)</span></div>
+      <a class="sb-link" href="https://mcraska.github.io/pcds-dashboard/">PC Demand Signal (PCDS)<span class="why">Matt's PC-demand companion dashboard</span></a>
+    </div>
+    <div class="sb-section">
+      <div class="sb-title">Primary data</div>
+      <a class="sb-link" href="https://www.semiconductors.org/news-events/latest-news/">SIA monthly sales<span class="why">WSTS 3-month moving average releases</span></a>
+      <a class="sb-link" href="https://fred.stlouisfed.org/series/PCU3344133441">FRED Semi PPI<span class="why">PCU3344133441, producer prices for semis</span></a>
+      <a class="sb-link" href="https://investor.tsmc.com/english/monthly-revenue/2026">TSMC monthly revenue<span class="why">~10th of each month</span></a>
+      <a class="sb-link" href="https://www.trendforce.com/price/dram/dram_spot">TrendForce DRAMeXchange<span class="why">DRAM / NAND spot &amp; contract (contract detail paywalled)</span></a>
+      <a class="sb-link" href="https://english.motir.go.kr/eng/">Korea MOTIR trade data<span class="why">Monthly chip exports (1st of month)</span></a>
+      <a class="sb-link" href="https://www.moea.gov.tw/Mns/english/">Taiwan MOEA<span class="why">Export orders (~20th of month)</span></a>
+    </div>
+    <div class="sb-section">
+      <div class="sb-title">News &amp; Analysis</div>
+      <a class="sb-link" href="https://www.reuters.com/technology/">Reuters · Technology<span class="why">Live coverage: TSMC, tariffs, AI demand</span></a>
+      <a class="sb-link" href="https://www.tomshardware.com/tag/semiconductors">Tom's Hardware · Semis<span class="why">Node roadmaps, foundry capacity updates</span></a>
+      <a class="sb-link" href="https://www.bloomberg.com/technology">Bloomberg Tech<span class="why">Equity moves, M&amp;A, policy risk</span></a>
+      <a class="sb-link" href="https://semianalysis.com/">SemiAnalysis<span class="why">Deep technical &amp; capacity research</span></a>
+    </div>
+    <div class="sb-section">
+      <div class="sb-title">Reports &amp; Outlooks</div>
+      <a class="sb-link" href="https://www.deloitte.com/us/en/insights/industry/technology/technology-media-telecom-outlooks/semiconductor-industry-outlook.html">Deloitte 2026 Outlook<span class="why">$975B 2026 view <span class="stale-tag">· superseded by SIA/WSTS</span></span></a>
+      <a class="sb-link" href="https://kpmg.com/us/en/articles/2026/global-semiconductor-industry-outlook-2026.html">KPMG 2026 Outlook<span class="why">Confidence index 63 (survey Q4'25)</span></a>
+      <a class="sb-link" href="https://www.electronicsweekly.com/news/business/foundry-2-0-to-grow-17-this-year-2026-03/">IDC Foundry 2.0 (via Electronics Weekly)<span class="why">&gt;$360B in 2026, +17% · IDC primary gated</span></a>
+    </div>
+    <div class="sb-section">
+      <div class="sb-title">Podcasts</div>
+      <a class="sb-link" href="https://www.acquired.fm/episodes/tsmc">Acquired · TSMC<span class="why">How foundry economics actually work</span></a>
+      <a class="sb-link" href="https://www.youtube.com/results?search_query=semiconductor+industry+podcast+2026">Industry Video Panels<span class="why">Latest analyst discussions</span></a>
+      <a class="sb-link" href="https://allin.com/">All-In · AI &amp; Chips<span class="why">Macro + AI infra perspective</span></a>
+    </div>
+    <div class="sb-section">
+      <div class="sb-title">Quick Links</div>
+      <a class="sb-link" href="https://www.perplexity.ai/finance/NVDA">NVDA on Perplexity Finance</a>
+      <a class="sb-link" href="https://www.perplexity.ai/finance/TSM">TSM on Perplexity Finance</a>
+      <a class="sb-link" href="https://www.perplexity.ai/finance/AMD">AMD on Perplexity Finance</a>
+      <a class="sb-link" href="https://www.perplexity.ai/finance/INTC">INTC on Perplexity Finance</a>
+    </div>
+  </aside>
+</div>
+
+<script>
+"use strict";
+let D = null, charts = {};
+const NA = "n/a, source needed";
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const LV = {low:0, mid:1, high:2};
+const LVNAME = {low:"stable", mid:"warming", high:"hot"};
+
+function parseDate(s){
+  if(!s) return null;
+  if(/^\d{4}-\d{2}$/.test(s)){ const [y,m]=s.split("-").map(Number); return new Date(Date.UTC(y,m,0)); } // month precision → end of month
+  const d = new Date(s.length===10 ? s+"T12:00:00Z" : s); return isNaN(d) ? null : d;
+}
+function ageDays(s){ const d=parseDate(s); return d ? (Date.now()-d.getTime())/864e5 : null; }
+function isStale(src){
+  if(!src || !src.asOf || !D) return false;
+  const lim = D.staleDays[src.cadence] ?? 45, a = ageDays(src.asOf);
+  return a !== null && a > lim;
+}
+function chip(src){
+  if(!src) return "";
+  const tagCls = (src.tag||"").split(" ")[0].replace("n/a","na");
+  const label = src.url ? `<a href="${esc(src.url)}" rel="noopener">${esc(src.label)}</a>` : esc(src.label);
+  const when = src.asOf ? esc(src.asOf) : esc(src.asOfLabel || "date n/a");
+  const stale = isStale(src) ? `<span class="stale-badge" title="Older than ${D.staleDays[src.cadence]} days for a ${esc(src.cadence)} series">STALE</span>` : "";
+  const note = src.note ? ` title="${esc(src.note)}"` : "";
+  return `<span class="chip"${note}>${label} · <span class="tag ${tagCls}">${esc(src.tag)}</span> · as of ${when} ${stale}</span>`;
+}
+function val(v){ return (v===null || v===undefined || v==="") ? `<span class="na">${NA}</span>` : esc(v); }
+function sign(x,d=2){ return (x>=0?"+":"")+x.toFixed(d); }
+function arrowPct(x){ return x>=0 ? `<span class="up">▲ ${sign(x,1)}%</span>` : `<span class="dn">▼ ${sign(x,1)}%</span>`; }
+function monLabel(p){ const [y,m]=p.split("-").map(Number); return new Date(Date.UTC(y,m-1,1)).toLocaleString("en-US",{month:"short",timeZone:"UTC"})+"'"+String(y).slice(2); }
+
+/* ---------- KPIs + PCDS ---------- */
+function renderKpis(){
+  const html = D.kpis.map(k=>{
+    let sub = esc(k.sub);
+    if(k.id==="sia_latest" && k.mom!=null) sub = `${arrowPct(k.mom)} MoM · ${k.yoy!=null?arrowPct(k.yoy):""} YoY · ${esc(k.sub)}`;
+    return `<div class="kpi"><div class="k-title">${esc(k.title)}</div><div class="k-val">${val(k.display)}</div><div class="k-sub">${sub}</div>${chip(k.src)}</div>`;
+  });
+  const p = D.pcds || {};
+  const lab = p.state_code===-2?"Bearish PC demand":p.state_code===2?"Bullish PC demand":p.state_code===0?"Neutral":NA;
+  const chg = p.prev ? `<div class="k-sub">Changed ${esc(p.changed)} (was ${esc(p.prev.state_label)})</div>` : "";
+  html.push(`<div class="kpi pcds"><div class="k-title"><a href="${esc(p.url)}" rel="noopener">PCDS state ↗</a></div>
+    <div class="k-val">${p.state_code!=null?(p.state_code>0?"+":"")+p.state_code:val(null)} <span style="font-size:13px;font-weight:500">${esc(lab)}</span></div>
+    <div class="k-sub">Score ${p.pcds_score!=null?p.pcds_score.toFixed(2):"n/a"} (−2…+2) · lead flag ${p.lead_flag?"ON":"off"}</div>
+    <div class="k-sub" style="font-size:11px">${esc(p.label||"")}</div>${chg}${chip(p.src)}</div>`);
+  $("kpis").innerHTML = html.join("");
+}
+
+/* ---------- Heat map ---------- */
+function renderHeat(){
+  $("heatmap").innerHTML = D.heat.map(h=>{
+    const cls = h.level==="high"?"hc-high":h.level==="mid"?"hc-mid":"hc-low";
+    const p = h.prev||{}; const dl = (LV[h.level]??0)-(LV[p.level]??0);
+    const arr = dl>0?"▲":dl<0?"▼":"●";
+    const chg = h.changed
+      ? `<div class="hc-chg">${arr} <b>Last changed ${esc(h.changed)}</b> · was ${esc(p.value)} (${esc(LVNAME[p.level]||p.level)}, ${esc(p.date)})</div>`
+      : `<div class="hc-chg">● Unchanged since ${esc(p.date)}${p.value && p.value!==h.value ? ` (label ${esc(p.value)} → ${esc(h.value)})`:""}</div>`;
+    return `<div class="heat-cell ${cls}"><div class="hc-name"><span>${esc(h.name)}</span><span class="lvl">${esc(LVNAME[h.level]||h.level)}</span></div>
+      <div class="hc-val">${arr} ${esc(h.value)}</div><div class="hc-note">${esc(h.note)}</div>${chg}${chip(h.src)}</div>`;
+  }).join("");
+}
+
+/* ---------- Alerts (state change or threshold only) ---------- */
+function computeAlerts(){
+  const out = [], q = D.quotes||{};
+  D.heat.forEach(h=>{
+    if(h.changed && ageDays(h.changed)!==null && ageDays(h.changed)<=14){
+      const up = (LV[h.level]??0) > (LV[(h.prev||{}).level]??0);
+      out.push({cls: h.level==="high"?"hot":"warn", title:`${h.name}: ${h.prev.value} → ${h.value}`,
+        body:`${h.note}`, rule:`State change on ${h.changed} (${up?"escalation":"de-escalation"})`, src:h.src});
+    }
+  });
+  const p = D.pcds||{};
+  if(p.changed && ageDays(p.changed)<=14) out.push({cls:"warn", title:`PCDS flipped to ${p.state_label}`, body:`Was ${p.prev.state_label} (${p.prev.asof})`, rule:"PCDS state change", src:p.src});
+  const tsmc = D.tsmc.series.at(-1);
+  if(tsmc && tsmc.yoyPct < 20) out.push({cls:"warn", title:`TSMC ${monLabel(tsmc.period)} revenue YoY ${sign(tsmc.yoyPct,1)}%`, body:"Foundry demand growth below threshold", rule:"Threshold: TSMC monthly YoY < +20%", src:D.tsmc.src});
+  const s = D.sia.series, sl = s.at(-1), sp = s.at(-2);
+  if(sl && sp && sl.valueB < sp.valueB) out.push({cls:"warn", title:`SIA sales fell MoM (${monLabel(sl.period)})`, body:`$${sp.valueB}B → $${sl.valueB}B`, rule:"Threshold: month-over-month decline", src:D.sia.src});
+  const L = Object.fromEntries(D.leading.map(l=>[l.id,l]));
+  if(L.kr_chips && L.kr_chips.yoyPct!=null && L.kr_chips.yoyPct<0) out.push({cls:"hot", title:"Korea chip exports negative YoY", body:L.kr_chips.value, rule:"Threshold: YoY < 0", src:L.kr_chips.src});
+  const cy = L.crwv_2032 && L.crwv_2032.yieldPct;
+  if(cy!=null && cy>=15) out.push({cls: cy>18?"hot":"warn", title:`CoreWeave 2032 yield ${cy}%`, body:"Neocloud credit stress", rule:"Threshold: watch ≥15%, trip >18% (T-05)", src:L.crwv_2032.src});
+  const sx = q.SOXX, nv = q.NVDA;
+  if(sx && sx.pct<=-2) out.push({cls:"warn", title:`SOXX ${sign(sx.pct)}% (${sx.asOf})`, body:"Broad sector de-risking", rule:"Threshold: SOXX session move ≤ −2%", src:sx.src});
+  if(sx && nv && Math.abs(nv.pct-sx.pct)>1) out.push({cls:"warn", title:`NVDA vs SOXX gap: ${sign(nv.pct-sx.pct)} pp`, body:"Divergence between AI leader and sector ETF", rule:"Threshold: |NVDA − SOXX| > 1 pp (Matt's original rule)", src:nv.src});
+  return out;
+}
+function renderAlerts(){
+  const a = computeAlerts();
+  $("alerts").innerHTML = a.length ? a.map(x=>`<div class="alert ${x.cls}"><div><div class="a-title">${esc(x.title)}</div><div class="a-body">${esc(x.body)}</div><div class="a-rule">${esc(x.rule)}</div>${chip(x.src)}</div></div>`).join("")
+    : `<div class="alert"><div><div class="a-title">No alerts</div><div class="a-body">No heat-cell state change in 14 days and no threshold breached.</div></div></div>`;
+}
+
+/* ---------- Leading indicators + capex ---------- */
+function renderLeading(){
+  const q = D.quotes||{}, groups = {};
+  D.leading.forEach(l=>{
+    let item = {...l};
+    if(l.auto==="tsmc"){ const t=D.tsmc.series.at(-1), tp=D.tsmc.series.at(-2);
+      item.value = `NT$${(t.ntdM/1000).toFixed(1)}B · ${monLabel(t.period)}`; item.sub = `${sign(t.yoyPct,1)}% YoY${tp?` · ${sign((t.ntdM/tp.ntdM-1)*100,1)}% MoM`:""}`; item.src = D.tsmc.src; }
+    if(l.auto && l.auto.startsWith("quote:")){ const s=l.auto.slice(6), x=q[s];
+      item.value = x?`$${x.price.toFixed(2)}`:null; item.sub = x?`${x.pct>=0?"▲":"▼"} ${sign(x.pct)}% · mkt cap ${x.mcap||NA}`:"quote unavailable"; item.src = x?x.src:null; }
+    (groups[l.group] ||= []).push(item);
+  });
+  $("leading").innerHTML = Object.entries(groups).map(([g,items])=>`<div class="lead-group"><h4>${esc(g)}</h4>${items.map(i=>
+    `<div class="lead"><div class="l-l">${esc(i.label)}</div><div class="l-v">${val(i.value)}</div><div class="l-s">${esc(i.sub||"")}</div>${chip(i.src)}</div>`).join("")}</div>`).join("");
+  const c = D.capex; $("capexQ").textContent = c.quarter;
+  const sum = c.rows.reduce((a,r)=>a+(r.valueB||0),0);
+  $("capex").innerHTML = `<thead><tr><th>Company</th><th>Period</th><th style="text-align:right">Capex</th><th style="text-align:right">YoY</th><th>Basis / source</th></tr></thead><tbody>`+
+    c.rows.map(r=>`<tr><td>${esc(r.co)}</td><td>${esc(r.period)}</td><td class="n">${r.valueB!=null?"$"+r.valueB.toFixed(1)+"B":val(null)}</td><td class="n">${r.yoyPct!=null?sign(r.yoyPct,0)+"%":`<span class="na">n/a</span>`}</td><td>${esc(r.basis)}<br>${chip(r.src)}</td></tr>`).join("")+
+    `<tr><td><b>Sum (indicative)</b></td><td></td><td class="n"><b>$${sum.toFixed(1)}B</b></td><td></td><td>Mixed definitions</td></tr></tbody>`;
+  $("capexNote").textContent = c.note;
+}
+
+/* ---------- CoWoS facts ---------- */
+function renderCowos(){
+  $("cowos").innerHTML = D.cowos.facts.map(f=>`<div class="fact"><div class="f-l">${esc(f.label)}</div><div class="f-v">${val(f.value)}</div><div class="f-s">${esc(f.sub)}</div>${chip(f.src)}</div>`).join("");
+  $("tsmcChip").innerHTML = chip(D.tsmc.src);
+}
+
+/* ---------- Companies ---------- */
+function renderCompanies(){
+  const q = D.quotes||{};
+  $("companies").innerHTML = D.companies.map(c=>{
+    const x = q[c.sym];
+    const price = x?`$${x.price.toFixed(2)}`:val(null);
+    const ch = x?`<div class="co-change ${x.pct>=0?"up":"dn"}">${x.pct>=0?"▲":"▼"} ${sign(x.chg)} (${sign(x.pct)}%)</div>`:"";
+    const cap = c.isETF ? `AUM: <span class="na">${NA}</span>` : `Mkt cap ${x&&x.mcap?esc(x.mcap):`<span class="na">n/a</span>`}`;
+    return `<div class="co"><div class="co-top"><div><span class="co-tag" style="background:${esc(c.color)}" aria-hidden="true"></span><span class="co-sym">${esc(c.sym)}</span></div><div class="co-name">${esc(c.name)}</div></div>
+      <div class="co-price">${price}</div>${ch}<div class="co-meta"><span>${esc(c.thesis)}</span><span>${cap}</span></div>${chip(x&&x.src)}</div>`;
+  }).join("");
+  const dates = [...new Set(D.companies.map(c=>q[c.sym]&&q[c.sym].asOf).filter(Boolean))];
+  $("quotesAsOf").textContent = dates.length ? `Quotes as of ${dates.join(", ")} close (server-side)` : "Quotes unavailable";
+}
+
+/* ---------- Charts (guarded) ---------- */
+const tickColor = "#a9b5cc", gridColor = "rgba(159,168,195,.12)";
+function fallbackTable(wrapId, headers, rows, msg){
+  $(wrapId).innerHTML = `<div class="fallback"><div class="chip">${esc(msg)}</div><table><thead><tr>${headers.map(h=>`<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+  $(wrapId).style.height="auto";
+}
+function mk(id, cfg){ if(charts[id]) charts[id].destroy(); charts[id] = new Chart($(id), cfg); }
+function renderCharts(){
+  const t = D.tsmc.series, labelsT = t.map(r=>monLabel(r.period));
+  const months = [...new Set([...D.sia.series.map(s=>s.period), ...D.ppi.series.filter(p=>p.period>="2026-01").map(p=>p.period)])].sort().filter(p=>p>="2026-01");
+  const siaM = Object.fromEntries(D.sia.series.map(s=>[s.period,s.valueB])), ppiM = Object.fromEntries(D.ppi.series.map(p=>[p.period,p.value]));
+  const q = D.quotes||{}, syms = D.companies.map(c=>c.sym).filter(s=>q[s]);
+  if(typeof window.Chart === "undefined"){
+    const msg = "Chart library failed to load. Showing the data as a table.";
+    fallbackTable("tsmcWrap", ["Month","NT$B","YoY %"], t.map(r=>[monLabel(r.period),(r.ntdM/1000).toFixed(1),sign(r.yoyPct,1)]), msg);
+    fallbackTable("sectorWrap", ["Month","SIA $B","PPI"], months.map(m=>[monLabel(m), siaM[m]??"—", ppiM[m]??"—"]), msg);
+    fallbackTable("movesWrap", ["Ticker","% chg"], syms.map(s=>[s, sign(q[s].pct)]), msg);
+    return;
+  }
+  mk("tsmcChart", {data:{labels:labelsT, datasets:[
+      {type:"bar", label:"Revenue (NT$B)", data:t.map(r=>+(r.ntdM/1000).toFixed(1)), backgroundColor:"rgba(96,165,250,.55)", borderColor:"#60a5fa", borderWidth:1, yAxisID:"y1", order:2},
+      {type:"line", label:"YoY %", data:t.map(r=>r.yoyPct), borderColor:"#f59e0b", tension:.3, yAxisID:"y2", order:1, pointRadius:3}]},
+    options:{responsive:true, maintainAspectRatio:false, interaction:{mode:"index",intersect:false},
+      plugins:{legend:{labels:{color:tickColor,boxWidth:12}}},
+      scales:{x:{ticks:{color:tickColor},grid:{color:gridColor}},
+        y1:{position:"left",beginAtZero:true,ticks:{color:tickColor},grid:{color:gridColor},title:{display:true,text:"NT$ billions",color:tickColor}},
+        y2:{position:"right",beginAtZero:true,ticks:{color:tickColor,callback:v=>v+"%"},grid:{drawOnChartArea:false},title:{display:true,text:"YoY %",color:tickColor}}}}});
+  mk("sectorChart", {data:{labels:months.map(monLabel), datasets:[
+      {type:"line", label:"SIA monthly sales ($B)", data:months.map(m=>siaM[m]??null), borderColor:"#5eead4", backgroundColor:"rgba(94,234,212,.18)", fill:true, tension:.3, yAxisID:"y1", spanGaps:false},
+      {type:"line", label:"Semi PPI (FRED index)", data:months.map(m=>ppiM[m]??null), borderColor:"#c4b5fd", borderDash:[4,3], tension:.3, yAxisID:"y2"}]},
+    options:{responsive:true, maintainAspectRatio:false, interaction:{mode:"index",intersect:false},
+      plugins:{legend:{labels:{color:tickColor,boxWidth:12}}},
+      scales:{x:{ticks:{color:tickColor},grid:{color:gridColor}},
+        y1:{position:"left",beginAtZero:true,ticks:{color:tickColor,callback:v=>"$"+v+"B"},grid:{color:gridColor},title:{display:true,text:"Sales $B",color:tickColor}},
+        y2:{position:"right",ticks:{color:tickColor},grid:{drawOnChartArea:false},title:{display:true,text:"PPI index",color:tickColor}}}}});
+  mk("movesChart", {type:"bar", data:{labels:syms, datasets:[{label:"% change", data:syms.map(s=>q[s].pct),
+      backgroundColor:syms.map(s=>q[s].pct>=0?"rgba(96,165,250,.8)":"rgba(251,146,60,.8)"), borderRadius:6}]},
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:{callbacks:{label:c=>sign(c.parsed.y)+"%"}}},
+      scales:{x:{ticks:{color:tickColor},grid:{display:false}}, y:{ticks:{color:tickColor,callback:v=>v+"%"},grid:{color:gridColor}}}}});
+  $("sectorChips").innerHTML = chip(D.sia.src)+" "+chip(D.ppi.src);
+  const qd=[...new Set(syms.map(s=>q[s].asOf))]; $("movesMeta").textContent = `Session of ${qd.join(", ")} · blue = up, orange = down`;
+}
+
+/* ---------- Status + boot ---------- */
+function renderStatus(msg){
+  const q = D.quotes||{}, qa = Object.values(q).map(x=>ageDays(x.asOf)).filter(x=>x!=null);
+  const gen = ageDays(D.generatedAt);
+  const fresh = gen!==null && gen<=2 && qa.length && Math.max(...qa) <= D.staleDays.daily;
+  $("dot").className = "dot " + (fresh ? "fresh" : "stale");
+  const genTxt = new Date(D.generatedAt).toLocaleString("en-US",{timeZone:"America/Chicago",dateStyle:"medium",timeStyle:"short"})+" CT";
+  $("statusText").textContent = msg || (fresh ? `Data current · generated ${genTxt}` : `Data may be stale · generated ${genTxt}`);
+  $("genAt").textContent = `data.json generated ${genTxt} by ${D.generatedBy}`;
+  $("log").innerHTML = (D.refreshLog||[]).map(l=>`${esc(l.at)} · ${esc(l.source)} · <b>${esc(l.status)}</b> ${esc(l.detail)}`).join("<br>") || "No log.";
+}
+function renderAll(msg){
+  const steps = [renderKpis, renderHeat, renderAlerts, renderLeading, renderCowos, renderCompanies];
+  steps.forEach(f=>{ try{ f(); }catch(e){ console.error(f.name, e); } });
+  try{ renderCharts(); }catch(e){ console.error("charts", e); }
+  renderStatus(msg);
+}
+async function loadData(){
+  const r = await fetch("data/data.json?ts="+Date.now(), {cache:"no-store"});
+  if(!r.ok) throw new Error("HTTP "+r.status);
+  return r.json();
+}
+async function reload(){
+  const btn = $("refreshBtn"); btn.disabled = true; btn.setAttribute("aria-busy","true"); btn.textContent = "↻ Reloading…";
+  try{
+    const prevGen = D && D.generatedAt; D = await loadData();
+    const t = new Date().toLocaleTimeString("en-US",{timeZone:"America/Chicago",timeStyle:"short"});
+    renderAll(null);
+    $("statusText").textContent += ` · reloaded ${t} CT${prevGen===D.generatedAt?" (no newer data yet)":""}`;
+    $("errBox").innerHTML = "";
+  }catch(e){
+    if(D) renderStatus(`Reload failed (${e.message}) · still showing data generated ${new Date(D.generatedAt).toLocaleString("en-US",{timeZone:"America/Chicago"})} CT`);
+    else $("errBox").innerHTML = `<div class="err">Could not load data/data.json (${esc(e.message)}). If you opened this file locally, serve the folder (python3 -m http.server).</div>`;
+  }finally{ btn.disabled = false; btn.removeAttribute("aria-busy"); btn.textContent = "↻ Reload data"; }
+}
+document.addEventListener("DOMContentLoaded", ()=>{
+  $("refreshBtn").addEventListener("click", reload);   // bind first, so a chart/CDN failure can't disable it
+  reload();
+});
+</script>
+</body>
+</html>
