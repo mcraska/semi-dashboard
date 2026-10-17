@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "title": "Semiconductor Industry Dashboard (v2)",
- "generatedAt": "2026-10-17T21:06:53Z",
+ "generatedAt": "2026-10-17T21:12:12Z",
  "generatedBy": "scripts/refresh.py",
  "staleDays": {
   "daily": 4,
@@ -1027,31 +1027,31 @@
    "source": "FRED",
    "status": "ok",
    "detail": "PCU3344133441 through 2026-09 = 75.313",
-   "at": "2026-10-17T21:06:53Z"
+   "at": "2026-10-17T21:12:12Z"
   },
   {
    "source": "SIA",
    "status": "ok",
    "detail": "latest 2026-08 $159.7B; no new release",
-   "at": "2026-10-17T21:06:53Z"
+   "at": "2026-10-17T21:12:12Z"
   },
   {
    "source": "TSMC",
-   "status": "ok",
-   "detail": "latest 2026-09 NT$511,857M (54.6% YoY)",
-   "at": "2026-10-17T21:06:53Z"
+   "status": "fail",
+   "detail": "<HTTPError 403: 'Forbidden'>",
+   "at": "2026-10-17T21:12:12Z"
   },
   {
    "source": "Quotes",
    "status": "ok",
    "detail": "8/8 updated",
-   "at": "2026-10-17T21:06:53Z"
+   "at": "2026-10-17T21:12:12Z"
   },
   {
    "source": "PCDS",
    "status": "ok",
-   "detail": "local asof 2026-10-09 state -2 score -1.4241",
-   "at": "2026-10-17T21:06:53Z"
+   "detail": "sources older (2026-09-21) than stored 2026-10-09; kept",
+   "at": "2026-10-17T21:12:12Z"
   }
  ]
 }
