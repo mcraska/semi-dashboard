@@ -357,7 +357,7 @@ function renderLeading(){
   const sum = c.rows.reduce((a,r)=>a+(r.valueB||0),0);
   $("capex").innerHTML = `<thead><tr><th>Company</th><th>Period</th><th style="text-align:right">Capex</th><th style="text-align:right">YoY</th><th>Basis / source</th></tr></thead><tbody>`+
     c.rows.map(r=>`<tr><td>${esc(r.co)}</td><td>${esc(r.period)}</td><td class="n">${r.valueB!=null?"$"+r.valueB.toFixed(1)+"B":val(null)}</td><td class="n">${r.yoyPct!=null?sign(r.yoyPct,0)+"%":`<span class="na">n/a</span>`}</td><td>${esc(r.basis)}<br>${chip(r.src)}</td></tr>`).join("")+
-    `<tr><td><b>Sum (indicative)</b></td><td></td><td class="n"><b>$${sum.toFixed(1)}B</b></td><td></td><td>Mixed definitions</td></tr></tbody>`;
+    `<tr><td><b>Sum</b></td><td></td><td class="n"><b>$${sum.toFixed(1)}B</b></td><td></td><td>${c.rows.every(r=>(r.basis||"").startsWith("cash payments"))&&new Set(c.rows.map(r=>r.periodEnd)).size===1?"Same basis and quarter-end":"Mixed definitions/periods (indicative)"}</td></tr></tbody>`;
   $("capexNote").textContent = c.note;
 }
 
@@ -374,7 +374,8 @@ function renderCompanies(){
     const x = q[c.sym];
     const price = x?`$${x.price.toFixed(2)}`:val(null);
     const ch = x?`<div class="co-change ${x.pct>=0?"up":"dn"}">${x.pct>=0?"▲":"▼"} ${sign(x.chg)} (${sign(x.pct)}%)</div>`:"";
-    const cap = c.isETF ? `AUM: <span class="na">${NA}</span>` : `Mkt cap ${x&&x.mcap?esc(x.mcap):`<span class="na">n/a</span>`}`;
+    const au = (D.aum||{})[c.sym];
+    const cap = c.isETF ? (au&&au.valueB!=null ? `AUM $${au.valueB.toFixed(2)}B (${esc(au.asOf)}, iShares)` : `AUM: <span class="na">${NA}</span>`) : `Mkt cap ${x&&x.mcap?esc(x.mcap):`<span class="na">n/a</span>`}`;
     return `<div class="co"><div class="co-top"><div><span class="co-tag" style="background:${esc(c.color)}" aria-hidden="true"></span><span class="co-sym">${esc(c.sym)}</span></div><div class="co-name">${esc(c.name)}</div></div>
       <div class="co-price">${price}</div>${ch}<div class="co-meta"><span>${esc(c.thesis)}</span><span>${cap}</span></div>${chip(x&&x.src)}</div>`;
   }).join("");

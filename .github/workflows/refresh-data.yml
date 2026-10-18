@@ -8,7 +8,6 @@ on:
 
 permissions:
   contents: write
-  pages: write
 
 concurrency:
   group: refresh-data
@@ -25,6 +24,9 @@ jobs:
           python-version: "3.12"
       - name: Refresh data/data.json (stdlib only; failures keep last good values)
         run: python3 scripts/refresh.py
+        env:
+          # Optional: free data.go.kr service key for Korea Customs 10/20-day exports (not wired yet; skipped when unset)
+          KOREA_DATA_API_KEY: ${{ secrets.KOREA_DATA_API_KEY }}
       - name: Show refresh log
         run: python3 -c "import json;[print(l['status'].upper(),l['source'],'-',l['detail']) for l in json.load(open('data/data.json'))['refreshLog']]"
       - name: Commit if changed
@@ -35,7 +37,4 @@ jobs:
           if git diff --cached --quiet; then echo "No data changes."; exit 0; fi
           git commit -m "data: refresh $(date -u +%Y-%m-%dT%H%MZ)"
           git push
-      - name: Request Pages rebuild (legacy branch build)
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" >/dev/null || echo "Pages rebuild request skipped (push already triggers a build)."
+      # No explicit Pages rebuild: the data commit itself triggers the legacy branch build (v2.1 removed the duplicate request).

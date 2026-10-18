@@ -1,5 +1,32 @@
 # CHANGELOG
 
+## v2.1.0, 2026-10-17: alternate sources for hand-entered and n/a cells
+
+**Newly automated in `scripts/refresh.py`** (each one fails gracefully and keeps its last good value):
+- **TSMC monthly revenue** now comes from SEC EDGAR 6-K filings, which fixes the investor.tsmc.com 403 from Actions. The IR page is kept as a fallback.
+- **Hyperscaler capex** for all four now comes from SEC XBRL, on one basis: cash payments for PP&E, discrete quarter, YoY.
+  - Quarter ended Jun 30 2026: MSFT $35.8B (+109.6%), GOOGL $44.9B (+100.1%), AMZN $54.2B (+68.4%), META $30.1B (+82.1%).
+  - These replace the mixed release figures (MSFT $41.0B and META $31.08B included finance leases). The sum row now reads "same basis and quarter-end".
+- **SOXX AUM** comes from the iShares page: $39.34B as of 2026-10-16.
+- **Taiwan export orders** come from the MOEA open-data CSV. The cell only advances when the CSV is newer than the stored press figure (Aug $102.96B).
+- **DRAM spot, NAND wafer spot and NAND contract** come from the TrendForce public tables.
+
+**Hand-verified this release** (from `scripts/seed_2026-10-17_v2.1.py`):
+- **Korea Customs Oct 1–10:** chip exports $12.20B, +170.9% (Confirmed, korea.kr).
+- **CoreWeave 5y CDS:** ~1,038bp on Oct 15 (Reported, CNBC citing S&P Global MI).
+- **September PC DRAM contract:** DDR4 8GB $148 (+4%) and DDR5 16GB $247 (flat). Reported: TrendForce data via a Daiwa note.
+- **CoWoS capacity path:** Goldman Sachs estimate, ~106k/mo avg in 2026 rising to ~227.5k in 2027 (Forecast, via TrendForce 10-16).
+- **Tariff/Trade heat cell:** re-sourced to Federal Register Proclamation 11002 (Section 232, 25% on certain advanced chips) and the CRS status as of 9/30. Level unchanged (High).
+
+**Still n/a:**
+- Quarterly CoWoS kwpm and utilization (not disclosed by TSMC)
+- Taiwan September orders (due ~Oct 20)
+- Korea Oct 1–20 days (due Oct 21)
+
+**Workflow:**
+- Removed the redundant "Request Pages rebuild" step and the `pages: write` permission. The data commit already triggers the branch build.
+- Optional `KOREA_DATA_API_KEY` secret is passed through.
+
 ## v2.0.0, 2026-10-17: GitHub Pages rebuild (from the Vercel snapshot, md5 d3a24bd5…)
 
 This version starts from `raw/index.html`, the Vercel build embedded as of Jul 10. It keeps Matt's dark theme, his sidebar plus main layout, the KPI strip, the heat map, the foundry and sector charts, alerts, company tiles and the daily-moves chart.

@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "title": "Semiconductor Industry Dashboard (v2)",
- "generatedAt": "2026-10-17T21:12:12Z",
+ "generatedAt": "2026-10-18T01:20:08Z",
  "generatedBy": "scripts/refresh.py",
  "staleDays": {
   "daily": 4,
@@ -328,25 +328,32 @@
    {
     "period": "2026-07",
     "ntdM": 467580,
-    "yoyPct": 44.7
+    "yoyPct": 44.7,
+    "release": "2026-08-10",
+    "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000471/tsm-revenue20260810.htm"
    },
    {
     "period": "2026-08",
     "ntdM": 514806,
-    "yoyPct": 53.3
+    "yoyPct": 53.3,
+    "release": "2026-09-10",
+    "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000658/tsm-revenue20260910.htm"
    },
    {
     "period": "2026-09",
     "ntdM": 511857,
-    "yoyPct": 54.6
+    "yoyPct": 54.6,
+    "release": "2026-10-08",
+    "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000680/tsm-revenue20261008.htm"
    }
   ],
   "src": {
-   "label": "TSMC IR monthly revenue",
-   "url": "https://investor.tsmc.com/english/monthly-revenue/2026",
+   "label": "TSMC monthly revenue 6-K (SEC EDGAR)",
+   "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000680/tsm-revenue20261008.htm",
    "tag": "Confirmed",
    "asOf": "2026-10-08",
-   "cadence": "monthly"
+   "cadence": "monthly",
+   "note": "Filed same day as TSMC's Taiwan release; IR page: https://investor.tsmc.com/english/monthly-revenue"
   }
  },
  "cowos": {
@@ -388,15 +395,16 @@
     }
    },
    {
-    "label": "Quarterly CoWoS wafers/mo & utilization %",
-    "value": null,
-    "sub": "Matt's Jul 10 series (40→135k, 93–99% util) had no per-point source; removed. Pressure index dropped (undefined).",
+    "label": "CoWoS capacity path (Goldman Sachs est.)",
+    "value": "~106k/mo avg 2026 → ~227.5k 2027 → ~290k 2028",
+    "sub": "1.275M wafers 2026, 2.73M 2027 (+114%), 3.48M 2028. Quarterly kwpm & utilization: n/a, source needed (TSMC does not disclose)",
     "src": {
-     "label": "—",
-     "url": null,
-     "tag": "n/a",
-     "asOf": "2026-07-10",
-     "cadence": "quarterly"
+     "label": "Goldman Sachs via TrendForce 2026-10-16",
+     "url": "https://www.trendforce.com/news/2026/10/16/news-after-tsmcs-3q26-earnings-key-brokerage-takeaways-as-2028-capex-forecasts-reach-us105b/",
+     "tag": "Forecast",
+     "asOf": "2026-10-16",
+     "cadence": "quarterly",
+     "note": "Tried: TrendForce, Digitimes (96.2% is TSMC overall utilization, not CoWoS), Morgan Stanley via press, TSMC Q3 call."
     }
    }
   ]
@@ -413,7 +421,7 @@
    "id": "dram_spot",
    "label": "DRAM spot · DDR5 16Gb 4800/5600",
    "value": "$60.60",
-   "sub": "session avg, ▲0.28% d/d",
+   "sub": "session avg, ▲0.28%",
    "src": {
     "label": "TrendForce DRAMeXchange",
     "url": "https://www.trendforce.com/price/dram/dram_spot",
@@ -425,15 +433,16 @@
   {
    "group": "Memory",
    "id": "dram_contract",
-   "label": "DRAM contract · DDR5 8GB SO-DIMM",
-   "value": "$133.00",
-   "sub": "2H Aug avg, ▲2.31% · Sep contract paywalled (n/a, source needed)",
+   "label": "PC DRAM contract · Sep",
+   "value": "DDR4 8GB $148 · DDR5 16GB $247",
+   "sub": "Sep avg: DDR4 8GB +4% MoM, DDR5 16GB flat; PC DRAM +2–4% MoM overall. 4Q26 PC DRAM fcst raised to +13–18% QoQ",
    "src": {
-    "label": "TrendForce DRAMeXchange",
-    "url": "https://www.trendforce.com/price/dram/dram_contract",
+    "label": "TrendForce 9/30 data via Daiwa note (Longbridge)",
+    "url": "https://longbridge.com/en/news/300766812.md",
     "tag": "Reported",
-    "asOf": "2026-08-31",
-    "cadence": "biweekly"
+    "asOf": "2026-09-30",
+    "cadence": "monthly",
+    "note": "TrendForce's own Sep table is members-only; public page still shows 2H Aug (DDR5 8GB SO-DIMM $133, +2.31%)."
    }
   },
   {
@@ -453,9 +462,9 @@
   {
    "group": "Memory",
    "id": "nand_contract",
-   "label": "NAND contract · 128Gb MLC (card/UFD)",
-   "value": "$30.475",
-   "sub": "2H Aug avg, ▲1.42% · Sep paywalled",
+   "label": "NAND contract · 128Gb MLC (public table)",
+   "value": "$30.48",
+   "sub": "avg, ▲1.42%",
    "src": {
     "label": "TrendForce",
     "url": "https://www.trendforce.com/price/flash/flash_spot",
@@ -496,16 +505,18 @@
   {
    "group": "Exports",
    "id": "kr_20d",
-   "label": "Korea chip exports · Oct 1–20 days",
-   "value": null,
-   "sub": "Due ~Oct 21 (Korea Customs)",
+   "label": "Korea chip exports · Oct 1–10",
+   "value": "$12.20B",
+   "sub": "+170.9% YoY · 46.7% of exports · total $26.10B (+102.0%), daily avg +28.5% (5.5 vs 3.5 working days). Provisional; 1–20 days due Oct 21",
    "src": {
-    "label": "Korea Customs Service",
-    "url": null,
-    "tag": "n/a",
-    "asOf": "2026-10-17",
-    "cadence": "monthly"
-   }
+    "label": "Korea Customs Service via korea.kr",
+    "url": "https://www.korea.kr/briefing/pressReleaseView.do?newsId=156784799",
+    "tag": "Confirmed",
+    "asOf": "2026-10-12",
+    "cadence": "event",
+    "note": "Mirror: https://www.donga.com/news/Economy/article/all/20261012/134824529/1. Automating needs a free data.go.kr key (KOREA_DATA_API_KEY), not wired."
+   },
+   "yoyPct": 170.9
   },
   {
    "group": "Exports",
@@ -519,17 +530,18 @@
     "tag": "Reported",
     "asOf": "2026-09-22",
     "cadence": "monthly"
-   }
+   },
+   "period": "2026-08"
   },
   {
    "group": "Exports",
    "id": "tw_orders_sep",
    "label": "Taiwan export orders · Sep",
    "value": null,
-   "sub": "Not yet released (MOEA guide $106.0–109.1B)",
+   "sub": "Not yet released (due ~Oct 20; MOEA guide $106.0–109.1B). Auto via MOEA CSV once posted",
    "src": {
-    "label": "MOEA",
-    "url": null,
+    "label": "MOEA open data CSV",
+    "url": "https://data.gov.tw/dataset/6845",
     "tag": "n/a",
     "asOf": "2026-10-17",
     "cadence": "monthly"
@@ -548,22 +560,24 @@
     "tag": "Reported",
     "asOf": "2026-10-15",
     "cadence": "daily",
-    "note": "Also CNBC 10-14: https://www.cnbc.com/2026/10/14/coreweave-stock-bond-yields-ai-debt.html . Not a direct TRACE pull; no 10-16 close in hand."
+    "note": "Also CNBC 10-14: https://www.cnbc.com/2026/10/14/coreweave-stock-bond-yields-ai-debt.html . Not a direct TRACE pull; no 10-16 close in hand. FINRA TRACE: public bond center needs a JS session and api.finra.org needs credentials (401), so not automated."
    }
   },
   {
    "group": "Neocloud credit",
    "id": "crwv_cds",
    "label": "CoreWeave 5y CDS",
-   "value": null,
-   "sub": "Desk note cites a Bloomberg record ~1,194.5bp (10-15) but no linkable source in hand",
+   "value": "~1,038bp",
+   "sub": "Last ~1,038bp on Oct 15 (+16% w/w, +164% y/y); intraday above 1,140bp. ≥1,000bp = distressed (S&P Global MI). Bloomberg/ICE intraday record 1,194.5bp (reported second-hand)",
    "src": {
-    "label": "—",
-    "url": null,
-    "tag": "n/a",
+    "label": "CNBC citing S&P Global Market Intelligence",
+    "url": "https://www.cnbc.com/2026/10/15/coreweave-credit-default-swaps-hit-distress-levels-as-investors-sour-on-ai-debt.html",
+    "tag": "Reported",
     "asOf": "2026-10-15",
-    "cadence": "daily"
-   }
+    "cadence": "event",
+    "note": "Reuters (US News mirror) same day: '>1,100bp' per S&P Global MI. CNBC: 9.75% 2031 notes YTM 15.78%."
+   },
+   "bp": 1038
   },
   {
    "group": "Neocloud credit",
@@ -573,70 +587,74 @@
   }
  ],
  "capex": {
-  "quarter": "Apr–Jun 2026 (latest reported)",
+  "quarter": "Quarter ended 2026-06-30",
   "rows": [
    {
     "co": "Microsoft",
-    "period": "FQ4'26",
-    "valueB": 41.0,
-    "basis": "incl. finance leases",
-    "yoyPct": null,
+    "period": "Qtr ended Jun 30, 2026",
+    "periodEnd": "2026-06-30",
+    "valueB": 35.802,
+    "basis": "cash payments for PP&E (XBRL PaymentsToAcquirePropertyPlantAndEquipment)",
+    "yoyPct": 109.6,
     "src": {
-     "label": "MSFT FY26 Q4 call",
-     "url": "https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4",
+     "label": "Microsoft 10-K (SEC XBRL)",
+     "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/",
      "tag": "Confirmed",
-     "asOf": "2026-07",
+     "asOf": "2026-07-29",
      "cadence": "quarterly",
-     "note": "Release month Jul 2026."
+     "note": "Discrete quarter derived from XBRL (YTD differences where needed). Excludes finance leases."
     }
    },
    {
     "co": "Alphabet",
-    "period": "Q2'26",
+    "period": "Qtr ended Jun 30, 2026",
+    "periodEnd": "2026-06-30",
     "valueB": 44.924,
-    "basis": "purchases of PP&E",
+    "basis": "cash payments for PP&E (XBRL PaymentsToAcquirePropertyPlantAndEquipment)",
     "yoyPct": 100.1,
     "src": {
-     "label": "Alphabet Q2'26 release",
-     "url": "https://s206.q4cdn.com/479360582/files/doc_financials/2026/q2/2026q2-alphabet-earnings-release.pdf",
+     "label": "Alphabet 10-Q (SEC XBRL)",
+     "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000071/",
      "tag": "Confirmed",
-     "asOf": "2026-07",
+     "asOf": "2026-07-23",
      "cadence": "quarterly",
-     "note": "Q2'25 $22.446B.  Release month Jul 2026."
+     "note": "Discrete quarter derived from XBRL (YTD differences where needed). Excludes finance leases."
     }
    },
    {
     "co": "Amazon",
-    "period": "Q2'26",
+    "period": "Qtr ended Jun 30, 2026",
+    "periodEnd": "2026-06-30",
     "valueB": 54.208,
-    "basis": "gross purchases of P&E",
+    "basis": "cash payments for PP&E (XBRL PaymentsToAcquireProductiveAssets)",
     "yoyPct": 68.4,
     "src": {
-     "label": "Amazon Q2'26 release",
-     "url": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Second-Quarter-Results/default.aspx",
+     "label": "Amazon 10-Q (SEC XBRL)",
+     "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000026/",
      "tag": "Confirmed",
-     "asOf": "2026-07",
+     "asOf": "2026-07-31",
      "cadence": "quarterly",
-     "note": "Q2'25 $32.183B.  Release month Jul 2026."
+     "note": "Discrete quarter derived from XBRL (YTD differences where needed). Excludes finance leases."
     }
    },
    {
     "co": "Meta",
-    "period": "Q2'26",
-    "valueB": 31.08,
-    "basis": "incl. finance-lease principal",
-    "yoyPct": null,
+    "period": "Qtr ended Jun 30, 2026",
+    "periodEnd": "2026-06-30",
+    "valueB": 30.116,
+    "basis": "cash payments for PP&E (XBRL PaymentsToAcquirePropertyPlantAndEquipment)",
+    "yoyPct": 82.1,
     "src": {
-     "label": "Meta Q2'26 release",
-     "url": "https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Reports-Second-Quarter-2026-Results/default.aspx",
+     "label": "Meta 10-Q (SEC XBRL)",
+     "url": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026050705/",
      "tag": "Confirmed",
-     "asOf": "2026-07",
+     "asOf": "2026-07-30",
      "cadence": "quarterly",
-     "note": "FY26 guide $130–145B (narrowed). Release month Jul 2026."
+     "note": "Discrete quarter derived from XBRL (YTD differences where needed). Excludes finance leases."
     }
    }
   ],
-  "note": "Mixed definitions across companies; sum is indicative only. Q3 prints due late Oct."
+  "note": "Cash purchases of PP&E from 10-Q/10-K XBRL, one consistent basis; excludes finance leases (MSFT/META headline capex includes them). Q3 2026 prints due late Oct."
  },
  "heatRules": {
   "semi_ppi": {
@@ -730,8 +748,8 @@
    "name": "Tariff / Trade Risk",
    "mode": "manual",
    "level": "high",
-   "value": "Rising",
-   "note": "Matt baseline, not re-verified in v2",
+   "value": "Active · broader pending",
+   "note": "Sec. 232 Proc. 11002: 25% on certain advanced computing chips (e.g. H200, MI325X) since Jan 15 2026, with exemptions incl. US data centers. Broader semi tariffs + offset program contingent on Commerce/USTR talks. CRS lists it in effect as of Sep 30 2026. Level kept High (desk read 10-17)",
    "prev": {
     "level": "high",
     "value": "Rising",
@@ -739,11 +757,12 @@
    },
    "changed": null,
    "src": {
-    "label": "Matt baseline (Jul 10)",
-    "url": null,
-    "tag": "Matt baseline",
-    "asOf": "2026-07-10",
-    "cadence": "event"
+    "label": "Federal Register 91 FR 2443 (Proc. 11002)",
+    "url": "https://www.federalregister.gov/documents/2026/01/20/2026-01052/adjusting-imports-of-semiconductors-semiconductor-manufacturing-equipment-and-their-derivative",
+    "tag": "Confirmed",
+    "asOf": "2026-09-30",
+    "cadence": "event",
+    "note": "Status check: CRS R49481 (in effect as of 2026-09-30) https://www.everycrsreport.com/reports/R49481.html ; WH fact sheet 2026-01-14. Level = desk read."
    }
   },
   {
@@ -1020,6 +1039,20 @@
    "tag": "Desk read",
    "asOf": "2026-10-09",
    "cadence": "weekly"
+  }
+ },
+ "aum": {
+  "SOXX": {
+   "valueB": 39.34,
+   "asOf": "2026-10-16",
+   "src": {
+    "label": "iShares SOXX fund page",
+    "url": "https://www.ishares.com/us/products/239705/ishares-phlx-semiconductor-etf",
+    "tag": "Confirmed",
+    "asOf": "2026-10-16",
+    "cadence": "daily",
+    "note": "Net assets of fund"
+   }
   }
  }
 }
