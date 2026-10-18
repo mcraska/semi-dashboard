@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "title": "Semiconductor Industry Dashboard (v2)",
- "generatedAt": "2026-10-18T01:20:08Z",
+ "generatedAt": "2026-10-18T01:21:34Z",
  "generatedBy": "scripts/refresh.py",
  "staleDays": {
   "daily": 4,
@@ -1046,55 +1046,55 @@
    "source": "FRED",
    "status": "ok",
    "detail": "PCU3344133441 through 2026-09 = 75.313",
-   "at": "2026-10-18T01:20:08Z"
+   "at": "2026-10-18T01:21:34Z"
   },
   {
    "source": "SIA",
    "status": "ok",
    "detail": "latest 2026-08 $159.7B; no new release",
-   "at": "2026-10-18T01:20:08Z"
+   "at": "2026-10-18T01:21:34Z"
   },
   {
    "source": "TSMC",
    "status": "ok",
    "detail": "EDGAR 6-K latest 2026-09",
-   "at": "2026-10-18T01:20:08Z"
+   "at": "2026-10-18T01:21:34Z"
   },
   {
    "source": "Quotes",
    "status": "ok",
    "detail": "8/8 updated",
-   "at": "2026-10-18T01:20:08Z"
+   "at": "2026-10-18T01:21:34Z"
   },
   {
    "source": "PCDS",
    "status": "ok",
    "detail": "sources older (2026-09-21) than stored 2026-10-09; kept",
-   "at": "2026-10-18T01:20:08Z"
+   "at": "2026-10-18T01:21:34Z"
   },
   {
    "source": "Capex/EDGAR",
    "status": "ok",
    "detail": "4/4 companies",
-   "at": "2026-10-18T01:20:08Z"
+   "at": "2026-10-18T01:21:34Z"
   },
   {
    "source": "SOXX AUM",
    "status": "ok",
    "detail": "$39.34B as of 2026-10-16",
-   "at": "2026-10-18T01:20:08Z"
+   "at": "2026-10-18T01:21:34Z"
   },
   {
    "source": "TW orders",
    "status": "ok",
    "detail": "CSV latest 2026-07 not newer than stored 2026-08; kept",
-   "at": "2026-10-18T01:20:08Z"
+   "at": "2026-10-18T01:21:34Z"
   },
   {
    "source": "TrendForce",
    "status": "ok",
    "detail": "3/3 cells",
-   "at": "2026-10-18T01:20:08Z"
+   "at": "2026-10-18T01:21:34Z"
   }
  ],
  "aum": {

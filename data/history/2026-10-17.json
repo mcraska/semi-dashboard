@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "title": "Semiconductor Industry Dashboard (v2)",
- "generatedAt": "2026-10-18T01:20:08Z",
+ "generatedAt": "2026-10-18T01:21:34Z",
  "generatedBy": "scripts/refresh.py",
  "staleDays": {
   "daily": 4,
