@@ -359,38 +359,26 @@
  "cowos": {
   "facts": [
    {
-    "label": "TSMC CoWoS capacity 2026",
-    "value": "120–140k wafers/mo",
-    "sub": "Plus 50–60k from OSAT partners → ~200k industry",
+    "label": "TSMC CoWoS · end-2026 (Silicon Analysts)",
+    "value": "~120–130k wafers/mo",
+    "sub": "Central ~125k wpm. Replaces Jun-15 Economic Daily via TrendForce 120–140k (now past quarterly stale window). TSMC does not disclose CoWoS capacity",
     "src": {
-     "label": "Economic Daily via TrendForce",
-     "url": "https://www.trendforce.com/news/2026/06/15/news-tsmc-cowos-supply-demand-gap-reportedly-seen-narrowing-from-20-to-10-by-end-2026-as-capacity-expands/",
+     "label": "Silicon Analysts Qual Watch 2026-09-07",
+     "url": "https://siliconanalysts.com/newsletter/qual-watch/2026-09-07",
      "tag": "Reported",
-     "asOf": "2026-06-15",
+     "asOf": "2026-09-07",
      "cadence": "quarterly"
     }
    },
    {
-    "label": "CoWoS supply–demand gap",
-    "value": "~20% → ~10% by end-2026",
-    "sub": "Institutional investors via EDN; TSMC plans >60% CoWoS expansion by 2027",
+    "label": "TSMC CoWoS · end-2026/27 (UAnalyze)",
+    "value": "~120k end-2026 · ~180k end-2027",
+    "sub": "End-2027 raised from ~160k (institutional investors via UAnalyze). Conflicts with Goldman ~227.5k avg 2027 — shown side by side",
     "src": {
-     "label": "Economic Daily via TrendForce",
-     "url": "https://www.trendforce.com/news/2026/06/15/news-tsmc-cowos-supply-demand-gap-reportedly-seen-narrowing-from-20-to-10-by-end-2026-as-capacity-expands/",
+     "label": "UAnalyze citing institutional investors",
+     "url": "https://uanalyze.com.tw/articles/9531755299",
      "tag": "Reported",
-     "asOf": "2026-06-15",
-     "cadence": "quarterly"
-    }
-   },
-   {
-    "label": "TSMC Q3'26 call (C.C. Wei)",
-    "value": "“a little bit shortage on the back end”",
-    "sub": "GF silicon-interposer partnership; demand “still far above our capability today to supply”",
-    "src": {
-     "label": "TSMC Q3'26 call transcript",
-     "url": "https://stockanalysis.com/quote/tpe/2330/transcripts/709077-q3-2026/",
-     "tag": "Confirmed",
-     "asOf": "2026-10-15",
+     "asOf": "2026-09-15",
      "cadence": "quarterly"
     }
    },
@@ -405,6 +393,31 @@
      "asOf": "2026-10-16",
      "cadence": "quarterly",
      "note": "Tried: TrendForce, Digitimes (96.2% is TSMC overall utilization, not CoWoS), Morgan Stanley via press, TSMC Q3 call."
+    }
+   },
+   {
+    "label": "CoWoS supply–demand gap (MoneyDJ)",
+    "value": "~30–35% now → 15–20% after expansion",
+    "sub": "Research houses via MoneyDJ; expansion path ~185–190k wpm. Wider than Jun-15 EDN/TrendForce ~20%→~10% — supports Tight heat cell (unchanged)",
+    "src": {
+     "label": "MoneyDJ citing research houses 2026-10-15",
+     "url": "https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=cc9317f2-f219-4d57-adae-f620e1ad4af9",
+     "tag": "Reported",
+     "asOf": "2026-10-15",
+     "cadence": "quarterly",
+     "note": "Prior Jun-15 figure (~20%→~10% by end-2026, Economic Daily via TrendForce) retired as STALE; kept in CHANGELOG."
+    }
+   },
+   {
+    "label": "TSMC Q3'26 call (C.C. Wei)",
+    "value": "“a little bit shortage on the back end”",
+    "sub": "GF silicon-interposer partnership; demand “still far above our capability today to supply”",
+    "src": {
+     "label": "TSMC Q3'26 call transcript",
+     "url": "https://stockanalysis.com/quote/tpe/2330/transcripts/709077-q3-2026/",
+     "tag": "Confirmed",
+     "asOf": "2026-10-15",
+     "cadence": "quarterly"
     }
    }
   ]

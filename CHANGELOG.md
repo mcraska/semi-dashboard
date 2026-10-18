@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## v2.1.1, 2026-10-18: CoWoS facts — conflicting estimates side by side
+
+**Hand-verified** (from `scripts/seed_2026-10-18_cowos.py`; Semi Desk inbox 2026-10-18):
+- Replaced the Jun-15 Economic Daily / TrendForce cells (120–140k wpm; gap ~20%→~10%), which were past the 120-day quarterly STALE window.
+- **Capacity estimates shown side by side** (each with source, as-of, status chip):
+  - Silicon Analysts 09-07: ~120–130k wpm end-2026 (Reported)
+  - UAnalyze 09-15: ~120k end-2026 · ~180k end-2027 (Reported)
+  - Goldman Sachs via TrendForce 10-16: ~106k/mo avg 2026 → ~227.5k 2027 → ~290k 2028 (Forecast) — unchanged from v2.1.0
+- **Gap:** MoneyDJ 10-15 cites research houses at ~30–35% now → 15–20% after expansion to ~185–190k wpm (Reported). Wider than the June figure; supports the Tight heat cell.
+- Kept TSMC Q3'26 call line (Confirmed, 10-15).
+
+**Unchanged:** heat-map colors/levels (including TSMC/CoWoS = high · Tight). No Vercel touch. `refresh.py` does not overwrite `cowos.facts`.
+
 ## v2.1.0, 2026-10-17: alternate sources for hand-entered and n/a cells
 
 **Newly automated in `scripts/refresh.py`** (each one fails gracefully and keeps its last good value):
