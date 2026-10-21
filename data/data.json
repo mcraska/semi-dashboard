@@ -518,18 +518,18 @@
   {
    "group": "Exports",
    "id": "kr_20d",
-   "label": "Korea chip exports · Oct 1–10",
-   "value": "$12.20B",
-   "sub": "+170.9% YoY · 46.7% of exports · total $26.10B (+102.0%), daily avg +28.5% (5.5 vs 3.5 working days). Provisional; 1–20 days due Oct 21",
+   "label": "Korea chip exports · Oct 1–20",
+   "value": "$27.52B",
+   "sub": "+222.5% YoY · 44.7% of exports (+16.2pp) · total $61.61B (+105.4%), record for Oct 1–20. Per-working-day chip avg ~4% below Sep 1–20. Provisional; full-month MOTIR Nov 1",
    "src": {
-    "label": "Korea Customs Service via korea.kr",
-    "url": "https://www.korea.kr/briefing/pressReleaseView.do?newsId=156784799",
+    "label": "Korea Customs Service via Yonhap",
+    "url": "https://en.yna.co.kr/view/AEN20261021002051320",
     "tag": "Confirmed",
-    "asOf": "2026-10-12",
+    "asOf": "2026-10-21",
     "cadence": "event",
-    "note": "Mirror: https://www.donga.com/news/Economy/article/all/20261012/134824529/1. Automating needs a free data.go.kr key (KOREA_DATA_API_KEY), not wired."
+    "note": "Published 2026-10-21 09:00 KST. Automating needs a free data.go.kr key (KOREA_DATA_API_KEY), not wired."
    },
-   "yoyPct": 170.9
+   "yoyPct": 222.5
   },
   {
    "group": "Exports",
