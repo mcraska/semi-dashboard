@@ -1,0 +1,1058 @@
+{
+ "schema": 1,
+ "title": "Semiconductor Industry Dashboard (v2)",
+ "generatedAt": "2026-10-22T16:19:17Z",
+ "generatedBy": "scripts/refresh.py",
+ "staleDays": {
+  "daily": 4,
+  "weekly": 10,
+  "biweekly": 21,
+  "monthly": 45,
+  "quarterly": 120,
+  "annual": 400,
+  "event": 30
+ },
+ "kpis": [
+  {
+   "id": "fy_projection",
+   "title": "2026 Semi Sales (projection)",
+   "display": ">$1.6T",
+   "sub": "SIA statement, Aug release · WSTS Spring fcst $1.5T · Deloitte $975B superseded",
+   "src": {
+    "label": "SIA",
+    "url": "https://www.semiconductors.org/year-to-date-global-semiconductor-sales-top-1-trillion-through-august/",
+    "tag": "Confirmed",
+    "asOf": "2026-10-05",
+    "cadence": "monthly"
+   }
+  },
+  {
+   "id": "sia_latest",
+   "title": "Aug 2026 Global Sales",
+   "display": "$159.7B",
+   "sub": "SIA/WSTS 3-mo moving avg",
+   "src": {
+    "label": "SIA",
+    "url": "https://www.semiconductors.org/year-to-date-global-semiconductor-sales-top-1-trillion-through-august/",
+    "tag": "Confirmed",
+    "asOf": "2026-10-05",
+    "cadence": "monthly"
+   },
+   "mom": 8.0,
+   "yoy": 144.3
+  },
+  {
+   "id": "foundry2",
+   "title": "Foundry 2.0 Market 2026 (fcst)",
+   "display": ">$360B",
+   "sub": "IDC, +17% YoY (via Electronics Weekly) · old $218.8B TTM unverified, removed",
+   "src": {
+    "label": "IDC via Electronics Weekly",
+    "url": "https://www.electronicsweekly.com/news/business/foundry-2-0-to-grow-17-this-year-2026-03/",
+    "tag": "Reported",
+    "asOf": "2026-03",
+    "cadence": "annual",
+    "note": "IDC primary is gated (my.idc.com). Month from article URL."
+   }
+  },
+  {
+   "id": "kpmg",
+   "title": "Industry Confidence",
+   "display": "63",
+   "sub": "KPMG Semi Confidence Index · 2026 outlook (151 execs, Q4'25 survey), up from 59",
+   "src": {
+    "label": "KPMG 2026 Outlook",
+    "url": "https://kpmg.com/us/en/articles/2026/global-semiconductor-industry-outlook-2026.html",
+    "tag": "Confirmed",
+    "asOf": null,
+    "cadence": "annual",
+    "note": "Survey fielded Q4 2025; exact publication day not captured.",
+    "asOfLabel": "2026 outlook (survey Q4 2025)"
+   }
+  }
+ ],
+ "sia": {
+  "series": [
+   {
+    "period": "2026-01",
+    "valueB": 82.54,
+    "firstPrintB": 82.5,
+    "yoyPct": 46.1,
+    "release": "2026-03-06",
+    "url": "https://www.semiconductors.org/global-semiconductor-sales-increase-3-7-month-to-month-in-january/"
+   },
+   {
+    "period": "2026-02",
+    "valueB": 89.23,
+    "firstPrintB": 88.8,
+    "yoyPct": 61.8,
+    "release": "2026-04-03",
+    "url": "https://www.semiconductors.org/?p=30831"
+   },
+   {
+    "period": "2026-03",
+    "valueB": 99.5,
+    "firstPrintB": 99.5,
+    "yoyPct": 79.2,
+    "release": "2026-05-04",
+    "url": "https://www.semiconductors.org/global-semiconductor-sales-increase-25-from-q4-2025-to-q1-2026/"
+   },
+   {
+    "period": "2026-04",
+    "valueB": 110.5,
+    "firstPrintB": 110.5,
+    "yoyPct": 93.9,
+    "release": "2026-06-05",
+    "url": "https://www.semiconductors.org/global-semiconductor-sales-increase-11-month-to-month-in-april/"
+   },
+   {
+    "period": "2026-05",
+    "valueB": 120.6,
+    "firstPrintB": 120.6,
+    "yoyPct": 104.1,
+    "release": "2026-07-06",
+    "url": "https://www.semiconductors.org/global-semiconductor-sales-increase-9-2-month-to-month-in-may/"
+   },
+   {
+    "period": "2026-06",
+    "valueB": 137.9,
+    "firstPrintB": 134.5,
+    "yoyPct": 123.6,
+    "release": "2026-08-06",
+    "url": "https://www.semiconductors.org/global-semiconductor-sales-increase-35-1-from-q1-2026-to-q2-2026/"
+   },
+   {
+    "period": "2026-07",
+    "valueB": 147.9,
+    "firstPrintB": 146.8,
+    "yoyPct": 135.1,
+    "release": "2026-09-04",
+    "url": "https://www.semiconductors.org/global-semiconductor-sales-increase-6-4-month-to-month-in-july/"
+   },
+   {
+    "period": "2026-08",
+    "valueB": 159.7,
+    "firstPrintB": 159.7,
+    "yoyPct": 144.3,
+    "release": "2026-10-05",
+    "url": "https://www.semiconductors.org/year-to-date-global-semiconductor-sales-top-1-trillion-through-august/"
+   }
+  ],
+  "note": "WSTS 3-month moving average. valueB = latest value SIA has stated (later releases revise prior month).",
+  "src": {
+   "label": "SIA monthly release",
+   "url": "https://www.semiconductors.org/news-events/latest-news/",
+   "tag": "Confirmed",
+   "asOf": "2026-10-05",
+   "cadence": "monthly"
+  }
+ },
+ "ppi": {
+  "series": [
+   {
+    "period": "2024-01",
+    "value": 57.884
+   },
+   {
+    "period": "2024-02",
+    "value": 58.055
+   },
+   {
+    "period": "2024-03",
+    "value": 58.105
+   },
+   {
+    "period": "2024-04",
+    "value": 58.256
+   },
+   {
+    "period": "2024-05",
+    "value": 58.205
+   },
+   {
+    "period": "2024-06",
+    "value": 58.062
+   },
+   {
+    "period": "2024-07",
+    "value": 57.463
+   },
+   {
+    "period": "2024-08",
+    "value": 57.494
+   },
+   {
+    "period": "2024-09",
+    "value": 57.543
+   },
+   {
+    "period": "2024-10",
+    "value": 58.003
+   },
+   {
+    "period": "2024-11",
+    "value": 58.936
+   },
+   {
+    "period": "2024-12",
+    "value": 58.828
+   },
+   {
+    "period": "2025-01",
+    "value": 58.272
+   },
+   {
+    "period": "2025-02",
+    "value": 58.07
+   },
+   {
+    "period": "2025-03",
+    "value": 58.425
+   },
+   {
+    "period": "2025-04",
+    "value": 58.322
+   },
+   {
+    "period": "2025-05",
+    "value": 58.328
+   },
+   {
+    "period": "2025-06",
+    "value": 57.606
+   },
+   {
+    "period": "2025-07",
+    "value": 57.576
+   },
+   {
+    "period": "2025-08",
+    "value": 59.637
+   },
+   {
+    "period": "2025-09",
+    "value": 59.765
+   },
+   {
+    "period": "2025-10",
+    "value": 60.125
+   },
+   {
+    "period": "2025-11",
+    "value": 60.868
+   },
+   {
+    "period": "2025-12",
+    "value": 61.063
+   },
+   {
+    "period": "2026-01",
+    "value": 61.583
+   },
+   {
+    "period": "2026-02",
+    "value": 67.019
+   },
+   {
+    "period": "2026-03",
+    "value": 68.282
+   },
+   {
+    "period": "2026-04",
+    "value": 73.184
+   },
+   {
+    "period": "2026-05",
+    "value": 72.931
+   },
+   {
+    "period": "2026-06",
+    "value": 73.698
+   },
+   {
+    "period": "2026-07",
+    "value": 73.199
+   },
+   {
+    "period": "2026-08",
+    "value": 75.571
+   },
+   {
+    "period": "2026-09",
+    "value": 75.313
+   }
+  ],
+  "seriesId": "PCU3344133441",
+  "name": "PPI: Semiconductor & related device mfg",
+  "src": {
+   "label": "FRED PCU3344133441",
+   "url": "https://fred.stlouisfed.org/series/PCU3344133441",
+   "tag": "Confirmed",
+   "asOf": "2026-10-22",
+   "cadence": "monthly",
+   "note": "Pulled via fredgraph.csv; PPI is revised ~4 months after first print."
+  }
+ },
+ "tsmc": {
+  "series": [
+   {
+    "period": "2026-01",
+    "ntdM": 401255,
+    "yoyPct": 36.8
+   },
+   {
+    "period": "2026-02",
+    "ntdM": 317657,
+    "yoyPct": 22.2
+   },
+   {
+    "period": "2026-03",
+    "ntdM": 415191,
+    "yoyPct": 45.2
+   },
+   {
+    "period": "2026-04",
+    "ntdM": 410726,
+    "yoyPct": 17.5
+   },
+   {
+    "period": "2026-05",
+    "ntdM": 416975,
+    "yoyPct": 30.1
+   },
+   {
+    "period": "2026-06",
+    "ntdM": 442680,
+    "yoyPct": 67.9
+   },
+   {
+    "period": "2026-07",
+    "ntdM": 467580,
+    "yoyPct": 44.7,
+    "release": "2026-08-10",
+    "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000471/tsm-revenue20260810.htm"
+   },
+   {
+    "period": "2026-08",
+    "ntdM": 514806,
+    "yoyPct": 53.3,
+    "release": "2026-09-10",
+    "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000658/tsm-revenue20260910.htm"
+   },
+   {
+    "period": "2026-09",
+    "ntdM": 511857,
+    "yoyPct": 54.6,
+    "release": "2026-10-08",
+    "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000680/tsm-revenue20261008.htm"
+   }
+  ],
+  "src": {
+   "label": "TSMC monthly revenue 6-K (SEC EDGAR)",
+   "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000680/tsm-revenue20261008.htm",
+   "tag": "Confirmed",
+   "asOf": "2026-10-08",
+   "cadence": "monthly",
+   "note": "Filed same day as TSMC's Taiwan release; IR page: https://investor.tsmc.com/english/monthly-revenue"
+  }
+ },
+ "cowos": {
+  "facts": [
+   {
+    "label": "TSMC CoWoS · end-2026 (Silicon Analysts)",
+    "value": "~120–130k wafers/mo",
+    "sub": "Central ~125k wpm. Replaces Jun-15 Economic Daily via TrendForce 120–140k (now past quarterly stale window). TSMC does not disclose CoWoS capacity",
+    "src": {
+     "label": "Silicon Analysts Qual Watch 2026-09-07",
+     "url": "https://siliconanalysts.com/newsletter/qual-watch/2026-09-07",
+     "tag": "Reported",
+     "asOf": "2026-09-07",
+     "cadence": "quarterly"
+    }
+   },
+   {
+    "label": "TSMC CoWoS · end-2026/27 (UAnalyze)",
+    "value": "~120k end-2026 · ~180k end-2027",
+    "sub": "End-2027 raised from ~160k (institutional investors via UAnalyze). Conflicts with Goldman ~227.5k avg 2027 — shown side by side",
+    "src": {
+     "label": "UAnalyze citing institutional investors",
+     "url": "https://uanalyze.com.tw/articles/9531755299",
+     "tag": "Reported",
+     "asOf": "2026-09-15",
+     "cadence": "quarterly"
+    }
+   },
+   {
+    "label": "CoWoS capacity path (Goldman Sachs est.)",
+    "value": "~106k/mo avg 2026 → ~227.5k 2027 → ~290k 2028",
+    "sub": "1.275M wafers 2026, 2.73M 2027 (+114%), 3.48M 2028. Quarterly kwpm & utilization: n/a, source needed (TSMC does not disclose)",
+    "src": {
+     "label": "Goldman Sachs via TrendForce 2026-10-16",
+     "url": "https://www.trendforce.com/news/2026/10/16/news-after-tsmcs-3q26-earnings-key-brokerage-takeaways-as-2028-capex-forecasts-reach-us105b/",
+     "tag": "Forecast",
+     "asOf": "2026-10-16",
+     "cadence": "quarterly",
+     "note": "Tried: TrendForce, Digitimes (96.2% is TSMC overall utilization, not CoWoS), Morgan Stanley via press, TSMC Q3 call."
+    }
+   },
+   {
+    "label": "CoWoS supply–demand gap (MoneyDJ)",
+    "value": "~30–35% now → 15–20% after expansion",
+    "sub": "Research houses via MoneyDJ; expansion path ~185–190k wpm. Wider than Jun-15 EDN/TrendForce ~20%→~10% — supports Tight heat cell (unchanged)",
+    "src": {
+     "label": "MoneyDJ citing research houses 2026-10-15",
+     "url": "https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=cc9317f2-f219-4d57-adae-f620e1ad4af9",
+     "tag": "Reported",
+     "asOf": "2026-10-15",
+     "cadence": "quarterly",
+     "note": "Prior Jun-15 figure (~20%→~10% by end-2026, Economic Daily via TrendForce) retired as STALE; kept in CHANGELOG."
+    }
+   },
+   {
+    "label": "TSMC Q3'26 call (C.C. Wei)",
+    "value": "“a little bit shortage on the back end”",
+    "sub": "GF silicon-interposer partnership; demand “still far above our capability today to supply”",
+    "src": {
+     "label": "TSMC Q3'26 call transcript",
+     "url": "https://stockanalysis.com/quote/tpe/2330/transcripts/709077-q3-2026/",
+     "tag": "Confirmed",
+     "asOf": "2026-10-15",
+     "cadence": "quarterly"
+    }
+   }
+  ]
+ },
+ "leading": [
+  {
+   "group": "Foundry",
+   "id": "tsmc_rev",
+   "label": "TSMC monthly revenue",
+   "auto": "tsmc"
+  },
+  {
+   "group": "Memory",
+   "id": "dram_spot",
+   "label": "DRAM spot · DDR5 16Gb 4800/5600",
+   "value": "$61.10",
+   "sub": "session avg, ▲0.38%",
+   "src": {
+    "label": "TrendForce DRAMeXchange",
+    "url": "https://www.trendforce.com/price/dram/dram_spot",
+    "tag": "Reported",
+    "asOf": "2026-10-22",
+    "cadence": "daily"
+   }
+  },
+  {
+   "group": "Memory",
+   "id": "dram_contract",
+   "label": "PC DRAM contract · Sep",
+   "value": "DDR4 8GB $148 · DDR5 16GB $247",
+   "sub": "Sep avg: DDR4 8GB +4% MoM, DDR5 16GB flat; PC DRAM +2–4% MoM overall. 4Q26 PC DRAM fcst raised to +13–18% QoQ",
+   "src": {
+    "label": "TrendForce 9/30 data via Daiwa note (Longbridge)",
+    "url": "https://longbridge.com/en/news/300766812.md",
+    "tag": "Reported",
+    "asOf": "2026-09-30",
+    "cadence": "monthly",
+    "note": "TrendForce's own Sep table is members-only; public page still shows 2H Aug (DDR5 8GB SO-DIMM $133, +2.31%)."
+   }
+  },
+  {
+   "group": "Memory",
+   "id": "nand_spot",
+   "label": "NAND wafer spot · 512Gb TLC",
+   "value": "$18.833",
+   "sub": "session avg, —0.00%",
+   "src": {
+    "label": "TrendForce",
+    "url": "https://www.trendforce.com/price/flash/flash_spot",
+    "tag": "Reported",
+    "asOf": "2026-10-12",
+    "cadence": "weekly"
+   }
+  },
+  {
+   "group": "Memory",
+   "id": "nand_contract",
+   "label": "NAND contract · 128Gb MLC (public table)",
+   "value": "$30.48",
+   "sub": "avg, ▲1.42%",
+   "src": {
+    "label": "TrendForce",
+    "url": "https://www.trendforce.com/price/flash/flash_spot",
+    "tag": "Reported",
+    "asOf": "2026-08-31",
+    "cadence": "biweekly"
+   }
+  },
+  {
+   "group": "Memory",
+   "id": "mem_fcst",
+   "label": "4Q26 contract forecast",
+   "value": "DRAM +10–15% · NAND +15–20% QoQ",
+   "sub": "Forecast — not a settled print",
+   "src": {
+    "label": "TrendForce press 2026-09-30",
+    "url": "https://www.trendforce.com/presscenter/news/20260930-13258.html",
+    "tag": "Forecast",
+    "asOf": "2026-09-30",
+    "cadence": "quarterly"
+   }
+  },
+  {
+   "group": "Exports",
+   "id": "kr_chips",
+   "label": "Korea chip exports · Sep",
+   "value": "$60.30B",
+   "sub": "+262.8% YoY · record month (total exports $120.94B, +83.5%)",
+   "yoyPct": 262.8,
+   "src": {
+    "label": "MOTIR (Korea)",
+    "url": "https://english.motir.go.kr/eng/article/EATCLdfa319ada/2743/view",
+    "tag": "Confirmed",
+    "asOf": "2026-10-01",
+    "cadence": "monthly"
+   }
+  },
+  {
+   "group": "Exports",
+   "id": "kr_20d",
+   "label": "Korea chip exports · Oct 1–20",
+   "value": "$27.52B",
+   "sub": "+222.5% YoY · 44.7% of exports (+16.2pp) · total $61.61B (+105.4%), record for Oct 1–20. Per-working-day chip avg ~4% below Sep 1–20. Provisional; full-month MOTIR Nov 1",
+   "src": {
+    "label": "Korea Customs Service via Yonhap",
+    "url": "https://en.yna.co.kr/view/AEN20261021002051320",
+    "tag": "Confirmed",
+    "asOf": "2026-10-21",
+    "cadence": "event",
+    "note": "Published 2026-10-21 09:00 KST. Automating needs a free data.go.kr key (KOREA_DATA_API_KEY), not wired."
+   },
+   "yoyPct": 222.5
+  },
+  {
+   "group": "Exports",
+   "id": "tw_orders",
+   "label": "Taiwan export orders · Sep",
+   "value": "$114.21B",
+   "sub": "+62.4% YoY (MOEA open data)",
+   "src": {
+    "label": "MOEA open data CSV (data.gov.tw 6845)",
+    "url": "https://data.gov.tw/dataset/6845",
+    "tag": "Confirmed",
+    "asOf": "2026-10-20",
+    "cadence": "monthly"
+   },
+   "period": "2026-09",
+   "yoyPct": 62.4
+  },
+  {
+   "group": "Neocloud credit",
+   "id": "crwv_2032",
+   "label": "CoreWeave 9.625% 2032 notes · yield",
+   "value": "~14.6%",
+   "sub": "~81c on Oct 15 after >15% / <80c on Oct 14 · Watch ≥15%, trip >18% (T-05)",
+   "yieldPct": 14.6,
+   "src": {
+    "label": "WSJ citing MarketAxess",
+    "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-10-15-2026/card/MLE9nNEYezUmliPXS9KA",
+    "tag": "Reported",
+    "asOf": "2026-10-15",
+    "cadence": "daily",
+    "note": "Also CNBC 10-14: https://www.cnbc.com/2026/10/14/coreweave-stock-bond-yields-ai-debt.html . Not a direct TRACE pull; no 10-16 close in hand. FINRA TRACE: public bond center needs a JS session and api.finra.org needs credentials (401), so not automated."
+   }
+  },
+  {
+   "group": "Neocloud credit",
+   "id": "crwv_cds",
+   "label": "CoreWeave 5y CDS",
+   "value": "~1,038bp",
+   "sub": "Last ~1,038bp on Oct 15 (+16% w/w, +164% y/y); intraday above 1,140bp. ≥1,000bp = distressed (S&P Global MI). Bloomberg/ICE intraday record 1,194.5bp (reported second-hand)",
+   "src": {
+    "label": "CNBC citing S&P Global Market Intelligence",
+    "url": "https://www.cnbc.com/2026/10/15/coreweave-credit-default-swaps-hit-distress-levels-as-investors-sour-on-ai-debt.html",
+    "tag": "Reported",
+    "asOf": "2026-10-15",
+    "cadence": "event",
+    "note": "Reuters (US News mirror) same day: '>1,100bp' per S&P Global MI. CNBC: 9.75% 2031 notes YTM 15.78%."
+   },
+   "bp": 1038
+  },
+  {
+   "group": "Neocloud credit",
+   "id": "crwv_eq",
+   "label": "CRWV equity",
+   "auto": "quote:CRWV"
+  }
+ ],
+ "capex": {
+  "quarter": "Latest reported quarter per company (SEC XBRL)",
+  "rows": [
+   {
+    "co": "Microsoft",
+    "period": "Qtr ended Jun 30, 2026",
+    "periodEnd": "2026-06-30",
+    "valueB": 35.802,
+    "basis": "cash payments for PP&E (XBRL PaymentsToAcquirePropertyPlantAndEquipment)",
+    "yoyPct": 109.6,
+    "src": {
+     "label": "Microsoft 10-K (SEC XBRL)",
+     "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/",
+     "tag": "Confirmed",
+     "asOf": "2026-07-29",
+     "cadence": "quarterly",
+     "note": "Discrete quarter derived from XBRL (YTD differences where needed). Excludes finance leases."
+    }
+   },
+   {
+    "co": "Alphabet",
+    "period": "Qtr ended Jun 30, 2026",
+    "periodEnd": "2026-06-30",
+    "valueB": 44.924,
+    "basis": "cash payments for PP&E (XBRL PaymentsToAcquirePropertyPlantAndEquipment)",
+    "yoyPct": 100.1,
+    "src": {
+     "label": "Alphabet 10-Q (SEC XBRL)",
+     "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000071/",
+     "tag": "Confirmed",
+     "asOf": "2026-07-23",
+     "cadence": "quarterly",
+     "note": "Discrete quarter derived from XBRL (YTD differences where needed). Excludes finance leases."
+    }
+   },
+   {
+    "co": "Amazon",
+    "period": "Qtr ended Jun 30, 2026",
+    "periodEnd": "2026-06-30",
+    "valueB": 54.208,
+    "basis": "cash payments for PP&E (XBRL PaymentsToAcquireProductiveAssets)",
+    "yoyPct": 68.4,
+    "src": {
+     "label": "Amazon 10-Q (SEC XBRL)",
+     "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000026/",
+     "tag": "Confirmed",
+     "asOf": "2026-07-31",
+     "cadence": "quarterly",
+     "note": "Discrete quarter derived from XBRL (YTD differences where needed). Excludes finance leases."
+    }
+   },
+   {
+    "co": "Meta",
+    "period": "Qtr ended Sep 30, 2026",
+    "periodEnd": "2026-09-30",
+    "valueB": 33.942,
+    "basis": "cash payments for PP&E (XBRL PaymentsToAcquirePropertyPlantAndEquipment)",
+    "yoyPct": 80.3,
+    "src": {
+     "label": "Meta 10-Q (SEC XBRL)",
+     "url": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026066773/",
+     "tag": "Confirmed",
+     "asOf": "2026-10-22",
+     "cadence": "quarterly",
+     "note": "Discrete quarter derived from XBRL (YTD differences where needed). Excludes finance leases."
+    }
+   }
+  ],
+  "note": "Cash purchases of PP&E from 10-Q/10-K XBRL, one consistent basis; excludes finance leases (MSFT/META headline capex includes them). Q3 2026 prints due late Oct."
+ },
+ "heatRules": {
+  "semi_ppi": {
+   "metric": "FRED PPI YoY %",
+   "low_lt": 5,
+   "high_gte": 15,
+   "words": {
+    "low": "Stable",
+    "mid": "Firming",
+    "high": "Hot"
+   }
+  },
+  "sales_yoy": {
+   "metric": "SIA latest YoY %",
+   "low_lt": 15,
+   "high_gte": 40,
+   "words": {
+    "low": "Normal",
+    "mid": "Strong",
+    "high": "Hot"
+   }
+  },
+  "note": "v2 default thresholds proposed for Matt to tune; rule cells recompute on every refresh."
+ },
+ "heat": [
+  {
+   "id": "ai_demand",
+   "name": "AI Demand",
+   "mode": "manual",
+   "level": "high",
+   "value": "Elevated",
+   "note": "TSMC: demand “still far above our capability today to supply”",
+   "prev": {
+    "level": "high",
+    "value": "Elevated",
+    "date": "2026-07-10"
+   },
+   "changed": null,
+   "src": {
+    "label": "TSMC Q3'26 call",
+    "url": "https://stockanalysis.com/quote/tpe/2330/transcripts/709077-q3-2026/",
+    "tag": "Confirmed",
+    "asOf": "2026-10-15",
+    "cadence": "event"
+   }
+  },
+  {
+   "id": "hbm",
+   "name": "HBM / Memory",
+   "mode": "manual",
+   "level": "high",
+   "value": "Tight",
+   "note": "Loudest gate; 4Q26 DRAM contract fcst +10–15% QoQ; server DRAM undersupplied",
+   "prev": {
+    "level": "high",
+    "value": "Tight",
+    "date": "2026-07-10"
+   },
+   "changed": null,
+   "src": {
+    "label": "TrendForce 2026-09-30 + Semi Desk board",
+    "url": "https://www.trendforce.com/presscenter/news/20260930-13258.html",
+    "tag": "Desk read",
+    "asOf": "2026-10-14",
+    "cadence": "event"
+   }
+  },
+  {
+   "id": "cowos",
+   "name": "TSMC / CoWoS Capacity",
+   "mode": "manual",
+   "level": "high",
+   "value": "Tight",
+   "note": "Wei 10-15: “a little bit shortage on the back end”",
+   "prev": {
+    "level": "high",
+    "value": "Hot",
+    "date": "2026-07-10"
+   },
+   "changed": null,
+   "src": {
+    "label": "TSMC Q3'26 call",
+    "url": "https://stockanalysis.com/quote/tpe/2330/transcripts/709077-q3-2026/",
+    "tag": "Confirmed",
+    "asOf": "2026-10-15",
+    "cadence": "event"
+   }
+  },
+  {
+   "id": "trade",
+   "name": "Tariff / Trade Risk",
+   "mode": "manual",
+   "level": "high",
+   "value": "Active · broader pending",
+   "note": "Sec. 232 Proc. 11002: 25% on certain advanced computing chips (e.g. H200, MI325X) since Jan 15 2026, with exemptions incl. US data centers. Broader semi tariffs + offset program contingent on Commerce/USTR talks. CRS lists it in effect as of Sep 30 2026. Level kept High (desk read 10-17)",
+   "prev": {
+    "level": "high",
+    "value": "Rising",
+    "date": "2026-07-10"
+   },
+   "changed": null,
+   "src": {
+    "label": "Federal Register 91 FR 2443 (Proc. 11002)",
+    "url": "https://www.federalregister.gov/documents/2026/01/20/2026-01052/adjusting-imports-of-semiconductors-semiconductor-manufacturing-equipment-and-their-derivative",
+    "tag": "Confirmed",
+    "asOf": "2026-09-30",
+    "cadence": "event",
+    "note": "Status check: CRS R49481 (in effect as of 2026-09-30) https://www.everycrsreport.com/reports/R49481.html ; WH fact sheet 2026-01-14. Level = desk read."
+   }
+  },
+  {
+   "id": "power",
+   "name": "Power / Site Capacity",
+   "mode": "manual",
+   "level": "high",
+   "value": "Hot",
+   "note": "TX TCEQ permit freeze · Oregon statewide DEQ pause to 2027-07-01 · SF 45-day moratorium (10-16)",
+   "prev": {
+    "level": "mid",
+    "value": "Warming",
+    "date": "2026-07-10"
+   },
+   "changed": "2026-10-17",
+   "src": {
+    "label": "TX Gov / OR Gov letter / SF Standard",
+    "url": "https://sfstandard.com/2026/10/16/mayor-lurie-data-center-moratorium/",
+    "tag": "Confirmed",
+    "asOf": "2026-10-16",
+    "cadence": "event",
+    "note": "TX: https://gov.texas.gov/uploads/files/press/TCEQ_Data_Center.pdf · OR: https://www.opb.org/pdf/100926_GovernorLettertoDEQDataCenterPermitting_1791931532928.pdf · Counterweight: SemiAnalysis says only ~2.3 GW of ~21 GW in local-moratorium areas likely delayed (excl. TX)."
+   }
+  },
+  {
+   "id": "semi_ppi",
+   "name": "Semi PPI",
+   "mode": "rule",
+   "level": "high",
+   "value": "Hot",
+   "note": "FRED PPI +26.0% YoY (2026-09)",
+   "prev": {
+    "level": "mid",
+    "value": "Firming",
+    "date": "2026-07-10"
+   },
+   "changed": "2026-10-17",
+   "src": {
+    "label": "FRED PCU3344133441",
+    "url": "https://fred.stlouisfed.org/series/PCU3344133441",
+    "tag": "Rule",
+    "asOf": "2026-10-22",
+    "cadence": "monthly",
+    "note": "Rule: <5% low, ≥15% high"
+   }
+  },
+  {
+   "id": "sales_yoy",
+   "name": "Global Sales YoY",
+   "mode": "rule",
+   "level": "high",
+   "value": "Hot",
+   "note": "SIA +144.3% YoY (2026-08, $159.7B)",
+   "prev": {
+    "level": "low",
+    "value": "Strong",
+    "date": "2026-07-10"
+   },
+   "changed": "2026-10-17",
+   "src": {
+    "label": "SIA monthly release",
+    "url": "https://www.semiconductors.org/year-to-date-global-semiconductor-sales-top-1-trillion-through-august/",
+    "tag": "Rule",
+    "asOf": "2026-10-05",
+    "cadence": "monthly",
+    "note": "Rule: <15% low, ≥40% high"
+   }
+  },
+  {
+   "id": "confidence",
+   "name": "Confidence Index",
+   "mode": "manual",
+   "level": "low",
+   "value": "Stable",
+   "note": "KPMG 63 (2026 outlook), up from 59",
+   "prev": {
+    "level": "low",
+    "value": "Stable",
+    "date": "2026-07-10"
+   },
+   "changed": null,
+   "src": {
+    "label": "KPMG 2026 Outlook",
+    "url": "https://kpmg.com/us/en/articles/2026/global-semiconductor-industry-outlook-2026.html",
+    "tag": "Confirmed",
+    "asOf": null,
+    "cadence": "annual",
+    "asOfLabel": "2026 outlook (survey Q4 2025)"
+   }
+  }
+ ],
+ "companies": [
+  {
+   "sym": "NVDA",
+   "name": "NVIDIA Corp",
+   "color": "#76b900",
+   "thesis": "AI accelerators · supply-capped"
+  },
+  {
+   "sym": "AMD",
+   "name": "Advanced Micro",
+   "color": "#e879f9",
+   "thesis": "MI-series AI · server CPUs"
+  },
+  {
+   "sym": "INTC",
+   "name": "Intel",
+   "color": "#3b9be8",
+   "thesis": "18A foundry recovery"
+  },
+  {
+   "sym": "TSM",
+   "name": "Taiwan Semi (ADR)",
+   "color": "#f472b6",
+   "thesis": "Leading-edge + CoWoS"
+  },
+  {
+   "sym": "ASML",
+   "name": "ASML (ADR)",
+   "color": "#ff8000",
+   "thesis": "EUV lithography"
+  },
+  {
+   "sym": "MU",
+   "name": "Micron Tech",
+   "color": "#22d3ee",
+   "thesis": "HBM · memory cycle"
+  },
+  {
+   "sym": "SOXX",
+   "name": "iShares Semi ETF",
+   "color": "#a78bfa",
+   "thesis": "Sector proxy (ETF)",
+   "isETF": true
+  }
+ ],
+ "extraQuotes": [
+  "CRWV"
+ ],
+ "quotes": {
+  "NVDA": {
+   "price": 213.81,
+   "chg": -8.16,
+   "pct": -3.68,
+   "mcap": "5.153T",
+   "asOf": "2026-10-22T12:19:18.677-0400",
+   "src": {
+    "label": "CNBC quote service",
+    "url": "https://www.cnbc.com/quotes/NVDA",
+    "tag": "Reported",
+    "asOf": "2026-10-22T12:19:18.677-0400",
+    "cadence": "daily",
+    "note": "Regular-session last; server-side fetch"
+   }
+  },
+  "AMD": {
+   "price": 515.73,
+   "chg": -36.99,
+   "pct": -6.69,
+   "mcap": "841.916B",
+   "asOf": "2026-10-22T12:19:15.215-0400",
+   "src": {
+    "label": "CNBC quote service",
+    "url": "https://www.cnbc.com/quotes/AMD",
+    "tag": "Reported",
+    "asOf": "2026-10-22T12:19:15.215-0400",
+    "cadence": "daily",
+    "note": "Regular-session last; server-side fetch"
+   }
+  },
+  "INTC": {
+   "price": 87.64,
+   "chg": -5.32,
+   "pct": -5.72,
+   "mcap": "463.183B",
+   "asOf": "2026-10-22T12:19:18.870-0400",
+   "src": {
+    "label": "CNBC quote service",
+    "url": "https://www.cnbc.com/quotes/INTC",
+    "tag": "Reported",
+    "asOf": "2026-10-22T12:19:18.870-0400",
+    "cadence": "daily",
+    "note": "Regular-session last; server-side fetch"
+   }
+  },
+  "TSM": {
+   "price": 414.0,
+   "chg": -17.89,
+   "pct": -4.14,
+   "mcap": "2.147T",
+   "asOf": "2026-10-22T12:19:17.001-0400",
+   "src": {
+    "label": "CNBC quote service",
+    "url": "https://www.cnbc.com/quotes/TSM",
+    "tag": "Reported",
+    "asOf": "2026-10-22T12:19:17.001-0400",
+    "cadence": "daily",
+    "note": "Regular-session last; server-side fetch"
+   }
+  },
+  "ASML": {
+   "price": 1592.25,
+   "chg": -84.44,
+   "pct": -5.04,
+   "mcap": "618.028B",
+   "asOf": "2026-10-22T12:19:16.936-0400",
+   "src": {
+    "label": "CNBC quote service",
+    "url": "https://www.cnbc.com/quotes/ASML",
+    "tag": "Reported",
+    "asOf": "2026-10-22T12:19:16.936-0400",
+    "cadence": "daily",
+    "note": "Regular-session last; server-side fetch"
+   }
+  },
+  "MU": {
+   "price": 869.84,
+   "chg": -43.83,
+   "pct": -4.8,
+   "mcap": "984.151B",
+   "asOf": "2026-10-22T12:19:18.404-0400",
+   "src": {
+    "label": "CNBC quote service",
+    "url": "https://www.cnbc.com/quotes/MU",
+    "tag": "Reported",
+    "asOf": "2026-10-22T12:19:18.404-0400",
+    "cadence": "daily",
+    "note": "Regular-session last; server-side fetch"
+   }
+  },
+  "SOXX": {
+   "price": 482.66,
+   "chg": -27.7,
+   "pct": -5.43,
+   "mcap": null,
+   "asOf": "2026-10-22T12:19:16.443-0400",
+   "src": {
+    "label": "CNBC quote service",
+    "url": "https://www.cnbc.com/quotes/SOXX",
+    "tag": "Reported",
+    "asOf": "2026-10-22T12:19:16.443-0400",
+    "cadence": "daily",
+    "note": "Regular-session last; server-side fetch"
+   }
+  },
+  "CRWV": {
+   "price": 56.71,
+   "chg": -5.11,
+   "pct": -8.27,
+   "mcap": "31.278B",
+   "asOf": "2026-10-22T12:19:18.876-0400",
+   "src": {
+    "label": "CNBC quote service",
+    "url": "https://www.cnbc.com/quotes/CRWV",
+    "tag": "Reported",
+    "asOf": "2026-10-22T12:19:18.876-0400",
+    "cadence": "daily",
+    "note": "Regular-session last; server-side fetch"
+   }
+  }
+ },
+ "pcds": {
+  "url": "https://mcraska.github.io/pcds-dashboard/",
+  "label": "Semi Desk PCDS v0.2.1 — recreation signal",
+  "asof": "2026-10-09",
+  "pcds_score": -1.4241,
+  "state_code": -2,
+  "state_label": "bearish_pc_demand",
+  "lead_flag": true,
+  "version": "0.2.1",
+  "src": {
+   "label": "PCDS last-state.json (Semi Desk)",
+   "url": "https://mcraska.github.io/pcds-dashboard/",
+   "tag": "Desk read",
+   "asOf": "2026-10-09",
+   "cadence": "weekly"
+  }
+ },
+ "aum": {
+  "SOXX": {
+   "valueB": 45.43,
+   "asOf": "2026-10-21",
+   "src": {
+    "label": "iShares SOXX fund page",
+    "url": "https://www.ishares.com/us/products/239705/ishares-phlx-semiconductor-etf",
+    "tag": "Confirmed",
+    "asOf": "2026-10-21",
+    "cadence": "daily",
+    "note": "Net assets of fund"
+   }
+  }
+ }
+}
