@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "title": "Semiconductor Industry Dashboard (v2)",
- "generatedAt": "2026-11-10T19:04:19Z",
+ "generatedAt": "2026-11-11T19:01:39Z",
  "generatedBy": "scripts/refresh.py",
  "staleDays": {
   "daily": 4,
@@ -296,7 +296,7 @@
    "label": "FRED PCU3344133441",
    "url": "https://fred.stlouisfed.org/series/PCU3344133441",
    "tag": "Confirmed",
-   "asOf": "2026-11-10",
+   "asOf": "2026-11-11",
    "cadence": "monthly",
    "note": "Pulled via fredgraph.csv; PPI is revised ~4 months after first print."
   }
@@ -448,13 +448,13 @@
    "group": "Memory",
    "id": "dram_spot",
    "label": "DRAM spot · DDR5 16Gb 4800/5600",
-   "value": "$60.17",
-   "sub": "session avg, —0.00%",
+   "value": "$60.23",
+   "sub": "session avg, ▲0.11%",
    "src": {
     "label": "TrendForce DRAMeXchange",
     "url": "https://www.trendforce.com/price/dram/dram_spot",
     "tag": "Reported",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "cadence": "daily"
    }
   },
@@ -819,7 +819,7 @@
     "label": "FRED PCU3344133441",
     "url": "https://fred.stlouisfed.org/series/PCU3344133441",
     "tag": "Rule",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "cadence": "monthly",
     "note": "Rule: <5% low, ≥15% high"
    }
@@ -919,121 +919,121 @@
  ],
  "quotes": {
   "NVDA": {
-   "price": 167.78,
-   "chg": -10.89,
-   "pct": -6.1,
-   "mcap": "4.043T",
-   "asOf": "2026-11-10T14:04:20.557-0500",
+   "price": 176.86,
+   "chg": 7.97,
+   "pct": 4.72,
+   "mcap": "4.262T",
+   "asOf": "2026-11-11T14:01:40.599-0500",
    "src": {
     "label": "CNBC quote service",
     "url": "https://www.cnbc.com/quotes/NVDA",
     "tag": "Reported",
-    "asOf": "2026-11-10T14:04:20.557-0500",
+    "asOf": "2026-11-11T14:01:40.599-0500",
     "cadence": "daily",
     "note": "Regular-session last; server-side fetch"
    }
   },
   "AMD": {
-   "price": 512.72,
-   "chg": 4.14,
-   "pct": 0.81,
-   "mcap": "840.905B",
-   "asOf": "2026-11-10T14:04:20.549-0500",
+   "price": 565.5,
+   "chg": 50.28,
+   "pct": 9.76,
+   "mcap": "927.461B",
+   "asOf": "2026-11-11T14:01:40.643-0500",
    "src": {
     "label": "CNBC quote service",
     "url": "https://www.cnbc.com/quotes/AMD",
     "tag": "Reported",
-    "asOf": "2026-11-10T14:04:20.549-0500",
+    "asOf": "2026-11-11T14:01:40.643-0500",
     "cadence": "daily",
     "note": "Regular-session last; server-side fetch"
    }
   },
   "INTC": {
-   "price": 57.52,
-   "chg": -1.85,
-   "pct": -3.12,
-   "mcap": "305.719B",
-   "asOf": "2026-11-10T14:04:18.936-0500",
+   "price": 63.17,
+   "chg": 5.04,
+   "pct": 8.67,
+   "mcap": "335.749B",
+   "asOf": "2026-11-11T14:01:40.539-0500",
    "src": {
     "label": "CNBC quote service",
     "url": "https://www.cnbc.com/quotes/INTC",
     "tag": "Reported",
-    "asOf": "2026-11-10T14:04:18.936-0500",
+    "asOf": "2026-11-11T14:01:40.539-0500",
     "cadence": "daily",
     "note": "Regular-session last; server-side fetch"
    }
   },
   "TSM": {
-   "price": 391.97,
-   "chg": 3.35,
-   "pct": 0.86,
-   "mcap": "2.033T",
-   "asOf": "2026-11-10T14:04:20.417-0500",
+   "price": 415.81,
+   "chg": 19.33,
+   "pct": 4.88,
+   "mcap": "2.157T",
+   "asOf": "2026-11-11T14:01:40.248-0500",
    "src": {
     "label": "CNBC quote service",
     "url": "https://www.cnbc.com/quotes/TSM",
     "tag": "Reported",
-    "asOf": "2026-11-10T14:04:20.417-0500",
+    "asOf": "2026-11-11T14:01:40.248-0500",
     "cadence": "daily",
     "note": "Regular-session last; server-side fetch"
    }
   },
   "ASML": {
-   "price": 1504.5,
-   "chg": -8.75,
-   "pct": -0.58,
-   "mcap": "583.968B",
-   "asOf": "2026-11-10T14:04:19.059-0500",
+   "price": 1553.32,
+   "chg": 45.47,
+   "pct": 3.02,
+   "mcap": "602.918B",
+   "asOf": "2026-11-11T14:01:40.199-0500",
    "src": {
     "label": "CNBC quote service",
     "url": "https://www.cnbc.com/quotes/ASML",
     "tag": "Reported",
-    "asOf": "2026-11-10T14:04:19.059-0500",
+    "asOf": "2026-11-11T14:01:40.199-0500",
     "cadence": "daily",
     "note": "Regular-session last; server-side fetch"
    }
   },
   "MU": {
-   "price": 711.43,
-   "chg": -21.73,
-   "pct": -2.96,
-   "mcap": "804.923B",
-   "asOf": "2026-11-10T14:04:20.438-0500",
+   "price": 824.8,
+   "chg": 99.69,
+   "pct": 13.75,
+   "mcap": "933.198B",
+   "asOf": "2026-11-11T14:01:40.628-0500",
    "src": {
     "label": "CNBC quote service",
     "url": "https://www.cnbc.com/quotes/MU",
     "tag": "Reported",
-    "asOf": "2026-11-10T14:04:20.438-0500",
+    "asOf": "2026-11-11T14:01:40.628-0500",
     "cadence": "daily",
     "note": "Regular-session last; server-side fetch"
    }
   },
   "SOXX": {
-   "price": 145.34,
-   "chg": -1.42,
-   "pct": -0.97,
+   "price": 157.74,
+   "chg": 11.15,
+   "pct": 7.61,
    "mcap": null,
-   "asOf": "2026-11-10T14:04:19.038-0500",
+   "asOf": "2026-11-11T14:01:40.557-0500",
    "src": {
     "label": "CNBC quote service",
     "url": "https://www.cnbc.com/quotes/SOXX",
     "tag": "Reported",
-    "asOf": "2026-11-10T14:04:19.038-0500",
+    "asOf": "2026-11-11T14:01:40.557-0500",
     "cadence": "daily",
     "note": "Regular-session last; server-side fetch"
    }
   },
   "CRWV": {
-   "price": 47.83,
-   "chg": -1.15,
-   "pct": -2.35,
-   "mcap": "26.38B",
-   "asOf": "2026-11-10T14:04:19.435-0500",
+   "price": 61.29,
+   "chg": 12.56,
+   "pct": 25.76,
+   "mcap": "33.801B",
+   "asOf": "2026-11-11T14:01:40.643-0500",
    "src": {
     "label": "CNBC quote service",
     "url": "https://www.cnbc.com/quotes/CRWV",
     "tag": "Reported",
-    "asOf": "2026-11-10T14:04:19.435-0500",
+    "asOf": "2026-11-11T14:01:40.643-0500",
     "cadence": "daily",
     "note": "Regular-session last; server-side fetch"
    }
@@ -1061,66 +1061,66 @@
    "source": "FRED",
    "status": "ok",
    "detail": "PCU3344133441 through 2026-09 = 75.313",
-   "at": "2026-11-10T19:04:19Z"
+   "at": "2026-11-11T19:01:39Z"
   },
   {
    "source": "SIA",
    "status": "ok",
    "detail": "latest 2026-09 $172.6B; no new release",
-   "at": "2026-11-10T19:04:19Z"
+   "at": "2026-11-11T19:01:39Z"
   },
   {
    "source": "TSMC",
    "status": "ok",
    "detail": "EDGAR 6-K latest 2026-10",
-   "at": "2026-11-10T19:04:19Z"
+   "at": "2026-11-11T19:01:39Z"
   },
   {
    "source": "Quotes",
    "status": "ok",
    "detail": "8/8 updated",
-   "at": "2026-11-10T19:04:19Z"
+   "at": "2026-11-11T19:01:39Z"
   },
   {
    "source": "PCDS",
    "status": "ok",
    "detail": "sources older (2026-09-21) than stored 2026-10-09; kept",
-   "at": "2026-11-10T19:04:19Z"
+   "at": "2026-11-11T19:01:39Z"
   },
   {
    "source": "Capex/EDGAR",
    "status": "ok",
    "detail": "4/4 companies",
-   "at": "2026-11-10T19:04:19Z"
+   "at": "2026-11-11T19:01:39Z"
   },
   {
    "source": "SOXX AUM",
    "status": "ok",
-   "detail": "$37.53B as of 2026-11-09",
-   "at": "2026-11-10T19:04:19Z"
+   "detail": "$41.43B as of 2026-11-10",
+   "at": "2026-11-11T19:01:39Z"
   },
   {
    "source": "TW orders",
    "status": "ok",
    "detail": "CSV latest 2026-09 not newer than stored 2026-09; kept",
-   "at": "2026-11-10T19:04:19Z"
+   "at": "2026-11-11T19:01:39Z"
   },
   {
    "source": "TrendForce",
    "status": "ok",
    "detail": "3/3 cells",
-   "at": "2026-11-10T19:04:19Z"
+   "at": "2026-11-11T19:01:39Z"
   }
  ],
  "aum": {
   "SOXX": {
-   "valueB": 37.53,
-   "asOf": "2026-11-09",
+   "valueB": 41.43,
+   "asOf": "2026-11-10",
    "src": {
     "label": "iShares SOXX fund page",
     "url": "https://www.ishares.com/us/products/239705/ishares-phlx-semiconductor-etf",
     "tag": "Confirmed",
-    "asOf": "2026-11-09",
+    "asOf": "2026-11-10",
     "cadence": "daily",
     "note": "Net assets of fund"
    }
